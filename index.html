@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEL6ZRFZCM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-MEL6ZRFZCM');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfólio de Engenharia de Computação e Desenvolvimento de Software">
@@ -143,7 +152,7 @@
         }
         .project-card:hover .project-card-img {
             transform: scale(1.1);
-            opacity: 0.4; /* Escurece a imagem para o texto ficar legível */
+            opacity: 0.4;
         }
         .project-overlay {
             position: absolute;
@@ -159,7 +168,7 @@
             transition: background 0.4s ease;
         }
         .project-card:hover .project-overlay {
-            background: rgba(15, 15, 20, 0.7); /* Fundo vidro escuro no hover */
+            background: rgba(15, 15, 20, 0.7);
         }
         .project-title {
             color: white;
@@ -169,11 +178,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            transform: translateY(65px); /* Joga o título lá pra baixo inicialmente */
+            transform: translateY(65px);
             transition: transform 0.4s ease;
         }
         .project-card:hover .project-title {
-            transform: translateY(0); /* Sobe o título quando passa o mouse */
+            transform: translateY(0);
         }
         .project-details {
             opacity: 0;
@@ -212,7 +221,6 @@
             .hero-photo { width: 250px; height: 250px; margin-bottom: 30px; }
             .d-flex.gap-3 { justify-content: center !important; }
             .custom-tabs { flex-direction: column; }
-            /* Em telas de celular, os projetos devem mostrar os detalhes sempre, pois não tem "hover" de mouse */
             .project-title { transform: translateY(0); margin-bottom: 10px;}
             .project-details { opacity: 1; transform: translateY(0); max-height: none; margin-top: 10px; }
             .project-card-img { opacity: 0.4; }
@@ -577,7 +585,7 @@
 
         // Efeito Typing (Máquina de escrever)
         const typingText = document.getElementById('typing-text');
-        const phrases = ["Especialista em PHP e Java.", "Focado em Spring Boot.", "Criador de Soluções Escaláveis.", "Apaixonado por Clean Code."];
+        const phrases = ["Especialista em Java.", "Focado em Spring Boot.", "Criador de Soluções Escaláveis.", "Apaixonado por Clean Code."];
         let phraseIndex = 0;
         let letterIndex = 0;
         let isDeleting = false;
