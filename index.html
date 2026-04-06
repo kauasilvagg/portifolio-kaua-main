@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Engenharia de Computação e Desenvolvimento de Software">
+    <title>Portfólio | Kauã da Silva</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --dark-bg: #212529;
+            --success-glow: #20c997;
+        }
+        
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+        
+        /* --- ESTILOS DA NAVBAR --- */
+        .navbar { transition: all 0.4s ease; padding: 15px 0; }
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(33, 37, 41, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(-45deg, rgba(15,15,20,0.95), rgba(13,110,253,0.3), rgba(32,201,151,0.2), rgba(15,15,20,0.95)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: 400% 400%;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            padding-top: 80px;
+            padding-bottom: 50px;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-photo {
+            width: 300px; height: 300px; object-fit: cover; border-radius: 50%;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 0 30px rgba(13, 110, 253, 0.5);
+            animation: floating 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+        .hero-photo:hover { transform: scale(1.05); }
+
+        @keyframes floating {
+            0% { transform: translate(0,  0px); }
+            50% { transform: translate(0, 15px); }
+            100% { transform: translate(0, -0px); }
+        }
+
+        /* --- EFEITO TYPING --- */
+        .typing-cursor { font-weight: bold; font-size: 1.25rem; color: var(--primary-color); animation: blink 0.8s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* --- BADGE DE ESTÁGIO PULSANTE --- */
+        .estagio-badge {
+            display: inline-block; background: linear-gradient(45deg, #198754, #20c997);
+            color: white; padding: 10px 20px; border-radius: 50px;
+            font-weight: bold; font-size: 0.95rem; margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(32, 201, 151, 0.5);
+            animation: pulse-glow 2s infinite; border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease;
+        }
+        .estagio-badge:hover { transform: scale(1.05) translateY(-2px); cursor: default; }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(32, 201, 151, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(32, 201, 151, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(32, 201, 151, 0); }
+        }
+
+        /* --- TÍTULOS DE SEÇÃO --- */
+        .section-title { position: relative; display: inline-block; margin-bottom: 3rem; font-weight: 700; }
+        .section-title::after {
+            content: ''; display: block; width: 50%; height: 3px; background: var(--primary-color);
+            margin: 10px auto 0; transition: width 0.4s ease;
+        }
+        .section-title:hover::after { width: 100%; }
+
+        /* --- TABS INTERATIVAS (SOBRE MIM) --- */
+        .custom-tabs { gap: 10px; }
+        .custom-tabs .nav-link {
+            color: #555; border-radius: 50px; font-weight: 600; padding: 12px 25px;
+            transition: all 0.3s ease; border: 1px solid #e9ecef; background-color: white;
+        }
+        .custom-tabs .nav-link:hover { color: var(--primary-color); background-color: rgba(13, 110, 253, 0.05); transform: translateY(-2px); }
+        .custom-tabs .nav-link.active {
+            background-color: var(--primary-color); color: white; border-color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3); transform: translateY(-2px);
+        }
+        .tab-content-box { border-left: 4px solid var(--primary-color); background-color: #f8f9fa; border-radius: 0 8px 8px 0; }
+
+        /* --- FLIP CARDS 3D (STACKS) --- */
+        .skill-flip-card { background-color: transparent; height: 200px; perspective: 1000px; margin-bottom: 20px; }
+        .skill-flip-card-inner {
+            position: relative; width: 100%; height: 100%; text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d;
+        }
+        .skill-flip-card:hover .skill-flip-card-inner { transform: rotateY(180deg); }
+        .skill-flip-card-front, .skill-flip-card-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            border-radius: 15px; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .skill-flip-card-front { background-color: white; border: 1px solid #eee; }
+        .skill-flip-card-front i { font-size: 4rem; color: #555; transition: color 0.3s; }
+        .skill-flip-card:hover .skill-flip-card-front i { color: var(--primary-color); }
+        .skill-flip-card-back { background-color: var(--primary-color); color: white; transform: rotateY(180deg); border: 1px solid var(--primary-color); padding: 15px; }
+        .skill-flip-card-back p { font-size: 0.9rem; line-height: 1.4; margin: 0; opacity: 0.9; }
+
+        /* --- NOVOS CARDS DE PROJETOS (IMAGE OVERLAY) --- */
+        .project-card {
+            position: relative;
+            height: 320px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background-color: #000;
+        }
+        .project-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, opacity 0.4s ease;
+            opacity: 0.8;
+        }
+        .project-card:hover .project-card-img {
+            transform: scale(1.1);
+            opacity: 0.4; /* Escurece a imagem para o texto ficar legível */
+        }
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(15,15,20,1) 10%, rgba(15,15,20,0.5) 60%, transparent 100%);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            transition: background 0.4s ease;
+        }
+        .project-card:hover .project-overlay {
+            background: rgba(15, 15, 20, 0.7); /* Fundo vidro escuro no hover */
+        }
+        .project-title {
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(65px); /* Joga o título lá pra baixo inicialmente */
+            transition: transform 0.4s ease;
+        }
+        .project-card:hover .project-title {
+            transform: translateY(0); /* Sobe o título quando passa o mouse */
+        }
+        .project-details {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .project-card:hover .project-details {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 200px;
+            margin-top: 15px;
+        }
+        .project-desc-text {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        /* --- BOTÃO VOLTAR AO TOPO --- */
+        #btnBackToTop {
+            position: fixed; bottom: 30px; right: 30px; display: none; z-index: 99;
+            border-radius: 50%; width: 50px; height: 50px; font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.3s;
+        }
+        #btnBackToTop:hover { transform: translateY(-5px); }
+
+        /* --- SCROLL REVEAL --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 991px) {
+            .hero { text-align: center; }
+            .hero-photo { width: 250px; height: 250px; margin-bottom: 30px; }
+            .d-flex.gap-3 { justify-content: center !important; }
+            .custom-tabs { flex-direction: column; }
+            /* Em telas de celular, os projetos devem mostrar os detalhes sempre, pois não tem "hover" de mouse */
+            .project-title { transform: translateY(0); margin-bottom: 10px;}
+            .project-details { opacity: 1; transform: translateY(0); max-height: none; margin-top: 10px; }
+            .project-card-img { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#home">&lt;MEU PORTIFÓLIO /&gt;</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#home">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Stack</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projetos">Projetos</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary ms-lg-3 mt-2 mt-lg-0 text-white px-4" href="#contato">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-7 order-2 order-lg-1 reveal">
+                    <div class="estagio-badge" title="Atuando com tecnologia no setor público">
+                        <i class="bi bi-laptop me-2"></i> Estágio Atual: Assembleia Legislativa do Maranhão
+                    </div>
+                    <h1 class="display-3 fw-bold mb-2">KAUÃ DA SILVA</h1>
+                    <p class="lead mb-4 text-light opacity-75" style="min-height: 30px;">
+                        Desenvolvedor de Software | <span id="typing-text" class="text-white fw-bold"></span><span class="typing-cursor">|</span>
+                    </p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap mt-3">
+                        <a href="#projetos" class="btn btn-primary btn-lg fw-bold px-4">Ver Portfólio</a>
+                        <a href="https://github.com/kauasilvagg" target="_blank" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-github"></i> GitHub</a>
+                        <a href="curriculo.pdf" download="Curriculo_Kaua_Silva.pdf" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-file-earmark-pdf-fill me-1"></i> Baixar CV</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 order-1 order-lg-2 text-center reveal" style="transition-delay: 0.2s;">
+                    <div class="profile-photo-container">
+                        <img src="69eb1dc7-e994-4513-9968-feed2156e40e.jpg" alt="Foto de Kauã" class="hero-photo img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-5">
+        <div class="container py-5">
+            <div class="text-center reveal mb-5">
+                <h2 class="section-title">Sobre Mim</h2>
+                <p class="lead text-muted">Conheça o profissional por trás do código.</p>
+            </div>
+
+            <div class="row align-items-center reveal" style="transition-delay: 0.1s;">
+                <div class="col-lg-10 mx-auto">
+                    
+                    <ul class="nav nav-pills justify-content-center mb-4 custom-tabs" id="sobreTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="perfil-tab" data-bs-toggle="pill" data-bs-target="#perfil" type="button" role="tab" aria-selected="true">
+                                <i class="bi bi-person-lines-fill me-2"></i> O Profissional
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="visao-tab" data-bs-toggle="pill" data-bs-target="#visao" type="button" role="tab" aria-selected="false">
+                                <i class="bi bi-code-square me-2"></i> Visão Técnica
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="trajetoria-tab" data-bs-toggle="pill" data-bs-target="#trajetoria" type="button" role="tab" aria-selected="false">
+                                <i class="bi bi-rocket-takeoff-fill me-2"></i> Trajetória
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="sobreTabsContent">
+                        
+                        <div class="tab-pane fade show active p-4 tab-content-box shadow-sm" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
+                            <h4 class="fw-bold text-primary mb-3">Muito prazer, sou o Kauã.</h4>
+                            <p class="fs-5 text-secondary">Sou estudante de Engenharia da Computação e atuo diretamente no desenvolvimento de soluções tecnológicas.</p>
+                            <p>Minha especialidade é conectar a lógica de baixo nível aprendida na engenharia com a agilidade do desenvolvimento web moderno. Não me considero apenas um "digitador de código", mas um solucionador de problemas reais de negócios. Tenho forte vivência com ecossistemas como <strong>Java, Spring Boot e PHP</strong>, sempre focado em entregar valor de forma mensurável.</p>
+                        </div>
+
+                        <div class="tab-pane fade p-4 tab-content-box shadow-sm" id="visao" role="tabpanel" aria-labelledby="visao-tab">
+                            <h4 class="fw-bold text-primary mb-3">Qualidade acima de quantidade.</h4>
+                            <p>Meu foco atual é o desenvolvimento de sistemas robustos e escaláveis. Acredito que código bom é código legível por outros desenvolvedores.</p>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>Clean Code:</strong> Manutenção e refatoração são parte natural do meu processo.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>Bancos de Dados:</strong> Modelagem relacional sólida com MySQL e PostgreSQL.</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>Arquitetura:</strong> Focado em boas práticas (SOLID, Design Patterns) aplicadas em Spring Boot e ecossistemas corporativos.</li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-pane fade" id="trajetoria" role="tabpanel" aria-labelledby="trajetoria-tab">
+                            <div class="row g-4 mt-2">
+                                <div class="col-md-6">
+                                    <div class="p-4 bg-white border rounded shadow-sm h-100 position-relative">
+                                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-10 rounded" style="z-index: 0;"></div>
+                                        <div class="position-relative" style="z-index: 1;">
+                                            <i class="bi bi-briefcase-fill fs-1 text-primary mb-3 d-block"></i>
+                                            <h5 class="fw-bold mb-1">Assembleia Legislativa do MA</h5>
+                                            <span class="badge bg-success mb-3">Estágio Atual</span>
+                                            <p class="text-muted">Atuação direta como Estagiário de TI, auxiliando no ecossistema tecnológico do setor público com responsabilidade e visão analítica.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-4 bg-white border rounded shadow-sm h-100">
+                                        <i class="bi bi-mortarboard-fill fs-1 text-primary mb-3 d-block"></i>
+                                        <h5 class="fw-bold mb-1">Engenharia da Computação</h5>
+                                        <span class="badge bg-secondary mb-3">Bacharelado em Andamento</span>
+                                        <p class="text-muted">Formação sólida que me garante entender como a tecnologia funciona "por baixo do capô", de hardware até arquitetura de software distribuído.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center reveal mb-5">
+                <h2 class="section-title">Minha Stack</h2>
+                <p class="text-muted">Passe o mouse sobre as tecnologias para ver como eu as aplico.</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                
+                <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.1s;">
+                    <div class="skill-flip-card">
+                        <div class="skill-flip-card-inner">
+                            <div class="skill-flip-card-front">
+                                <i class="devicon-java-plain"></i>
+                                <h5 class="fw-bold mt-3 mb-0">Java</h5>
+                            </div>
+                            <div class="skill-flip-card-back">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-cup-hot-fill"></i> Java</h6>
+                                <p>Criação de APIs corporativas, Orientação a Objetos avançada e lógica backend.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.2s;">
+                    <div class="skill-flip-card">
+                        <div class="skill-flip-card-inner">
+                            <div class="skill-flip-card-front">
+                                <i class="devicon-spring-plain"></i>
+                                <h5 class="fw-bold mt-3 mb-0">Spring Boot</h5>
+                            </div>
+                            <div class="skill-flip-card-back">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-gear-fill"></i> Spring</h6>
+                                <p>Microsserviços, injeção de dependências e segurança com Spring Security.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.3s;">
+                    <div class="skill-flip-card">
+                        <div class="skill-flip-card-inner">
+                            <div class="skill-flip-card-front">
+                                <i class="devicon-postgresql-plain"></i>
+                                <h5 class="fw-bold mt-3 mb-0">PostgreSQL</h5>
+                            </div>
+                            <div class="skill-flip-card-back">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-database-fill"></i> Banco de Dados</h6>
+                                <p>Modelagem relacional, queries otimizadas e garantia de integridade de dados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.4s;">
+                    <div class="skill-flip-card">
+                        <div class="skill-flip-card-inner">
+                            <div class="skill-flip-card-front">
+                                <i class="devicon-git-plain"></i>
+                                <h5 class="fw-bold mt-3 mb-0">Git & GitHub</h5>
+                            </div>
+                            <div class="skill-flip-card-back">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-git"></i> Versionamento</h6>
+                                <p>Controle de código fluido, resolução de conflitos e trabalho em equipe estruturado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.5s;">
+                    <div class="skill-flip-card">
+                        <div class="skill-flip-card-inner">
+                            <div class="skill-flip-card-front">
+                                <i class="devicon-php-plain"></i>
+                                <h5 class="fw-bold mt-3 mb-0">PHP & Hack</h5>
+                            </div>
+                            <div class="skill-flip-card-back">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-filetype-php"></i> Backend Web</h6>
+                                <p>Manutenção ágil, criação de rotas, scripts de backend e regras de negócio.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="projetos" class="py-5">
+        <div class="container">
+            <div class="text-center reveal mb-5">
+                <h2 class="section-title">Projetos em Destaque</h2>
+                <p class="text-muted">Aplicações práticas dos meus estudos e trabalhos.</p>
+            </div>
+
+            <div class="row g-4">
+                
+                <div class="col-md-4 reveal" style="transition-delay: 0.1s;">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ExtremeTours" class="project-card-img">
+                        <div class="project-overlay">
+                            <div class="project-title">
+                                <i class="bi bi-geo-alt fs-4 text-primary"></i> ExtremeTours
+                            </div>
+                            <div class="project-details">
+                                <p class="project-desc-text">Sistema de gerenciamento de passeios em São Luís e Regiões. Focado na experiência de gestão turística.</p>
+                                <div class="mb-3">
+                                    <span class="badge bg-primary text-white">Java</span>
+                                    <span class="badge bg-dark border border-secondary">Spring Boot</span>
+                                </div>
+                                <a href="https://github.com/kauasilvagg/extreme-tours/tree/master/src" target="_blank" class="btn btn-outline-light btn-sm w-100">Ver Código <i class="bi bi-github ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 reveal" style="transition-delay: 0.2s;">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Site de Pagamentos" class="project-card-img">
+                        <div class="project-overlay">
+                            <div class="project-title">
+                                <i class="bi bi-credit-card fs-4 text-primary"></i> Pagamentos
+                            </div>
+                            <div class="project-details">
+                                <p class="project-desc-text">Sistema robusto para realizar transações e pagamentos seguros com cartão e via PIX.</p>
+                                <div class="mb-3">
+                                    <span class="badge bg-primary text-white">TypeScript</span>
+                                    <span class="badge bg-dark border border-secondary">MySQL</span>
+                                </div>
+                                <a href="https://github.com/kauasilvagg/aprobrasil-pagamento-seguro-c2a1ddb1" target="_blank" class="btn btn-outline-light btn-sm w-100">Ver Código <i class="bi bi-github ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gestão de Empresa" class="project-card-img">
+                        <div class="project-overlay">
+                            <div class="project-title">
+                                <i class="bi bi-building fs-4 text-primary"></i> Gestão de Empresa
+                            </div>
+                            <div class="project-details">
+                                <p class="project-desc-text">Painel administrativo usado para gerenciar uma empresa aplicando filtros e regras complexas de negócio.</p>
+                                <div class="mb-3">
+                                    <span class="badge bg-primary text-white">PHP</span>
+                                    <span class="badge bg-dark border border-secondary">Hack</span>
+                                </div>
+                                <a href="https://github.com/kauasilvagg/dbempresa-codigos" target="_blank" class="btn btn-outline-light btn-sm w-100">Ver Código <i class="bi bi-github ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-5 bg-dark text-white text-center">
+        <div class="container py-5 reveal">
+            <h2 class="fw-bold mb-4">Vamos Construir Algo Juntos?</h2>
+            <p class="lead mb-5">Estou aberto a oportunidades de trabalho e colaboração em projetos.</p>
+            
+            <a href="mailto:seuemail@exemplo.com" class="btn btn-primary btn-lg px-5 me-md-3 mb-3 mb-md-0 shadow">
+                <i class="bi bi-envelope-fill me-2"></i> Enviar E-mail
+            </a>
+            
+            <a href="https://www.linkedin.com/in/kauã-magalhães-3b2182272" target="_blank" class="btn btn-outline-light btn-lg px-5 shadow">
+                <i class="bi bi-linkedin me-2"></i> LinkedIn
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white text-center py-4">
+        <div class="container">
+            <small>&copy; 2026 Kauã da Silva. Todos os direitos reservados.</small>
+        </div>
+    </footer>
+
+    <button id="btnBackToTop" class="btn btn-primary" title="Voltar ao topo">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Navbar Mobile Collapse
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuToggle = document.getElementById('navbarNav');
+        const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle: false});
+        navLinks.forEach((l) => {
+            l.addEventListener('click', () => { if (menuToggle.classList.contains('show')) { bsCollapse.toggle() } });
+        });
+
+        // Efeito Navbar e Botão Back To Top no Scroll
+        const navbar = document.querySelector('.navbar');
+        const btnBackToTop = document.getElementById('btnBackToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                navbar.classList.remove('bg-dark'); 
+            } else {
+                navbar.classList.remove('scrolled');
+                navbar.classList.add('bg-dark');
+            }
+            
+            if (window.scrollY > 300) {
+                btnBackToTop.style.display = "block";
+            } else {
+                btnBackToTop.style.display = "none";
+            }
+        });
+
+        btnBackToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Efeito Scroll Reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; 
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); 
+
+        // Efeito Typing (Máquina de escrever)
+        const typingText = document.getElementById('typing-text');
+        const phrases = ["Especialista em PHP e Java.", "Focado em Spring Boot.", "Criador de Soluções Escaláveis.", "Apaixonado por Clean Code."];
+        let phraseIndex = 0;
+        let letterIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentPhrase.substring(0, letterIndex - 1);
+                letterIndex--;
+            } else {
+                typingText.textContent = currentPhrase.substring(0, letterIndex + 1);
+                letterIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && letterIndex === currentPhrase.length) {
+                typeSpeed = 2000; 
+                isDeleting = true;
+            } else if (isDeleting && letterIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500; 
+            }
+            setTimeout(type, typeSpeed);
+        }
+        
+        document.addEventListener("DOMContentLoaded", type);
+    </script>
+</body>
+</html>
