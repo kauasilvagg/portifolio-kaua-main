@@ -6,13 +6,20 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-MEL6ZRFZCM');
     </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <meta name="description" content="Portfólio de Engenharia de Computação e Desenvolvimento de Software">
+    <meta property="og:title" content="Portfólio | Kauã da Silva - Desenvolvedor Backend">
+    <meta property="og:description" content="Engenheiro de Computação, especialista em Java, Spring Boot e PHP. Veja meus projetos focados em Clean Code e arquitetura escalável.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://seusite.vercel.app"> <meta property="og:type" content="website">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+
     <title>Portfólio | Kauã da Silva</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -135,78 +142,49 @@
 
         /* --- NOVOS CARDS DE PROJETOS (IMAGE OVERLAY) --- */
         .project-card {
-            position: relative;
-            height: 320px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            background-color: #000;
+            position: relative; height: 320px; border-radius: 15px; overflow: hidden;
+            border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background-color: #000;
         }
         .project-card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease, opacity 0.4s ease;
-            opacity: 0.8;
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease, opacity 0.4s ease; opacity: 0.8;
         }
-        .project-card:hover .project-card-img {
-            transform: scale(1.1);
-            opacity: 0.4;
-        }
+        .project-card:hover .project-card-img { transform: scale(1.1); opacity: 0.4; }
         .project-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            position: absolute; bottom: 0; left: 0; right: 0;
             background: linear-gradient(to top, rgba(15,15,20,1) 10%, rgba(15,15,20,0.5) 60%, transparent 100%);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 25px;
-            transition: background 0.4s ease;
+            height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 25px; transition: background 0.4s ease;
         }
-        .project-card:hover .project-overlay {
-            background: rgba(15, 15, 20, 0.7);
-        }
+        .project-card:hover .project-overlay { background: rgba(15, 15, 20, 0.7); }
         .project-title {
-            color: white;
-            font-weight: 700;
-            font-size: 1.3rem;
-            margin-bottom: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateY(65px);
-            transition: transform 0.4s ease;
+            color: white; font-weight: 700; font-size: 1.3rem; margin-bottom: 0;
+            display: flex; align-items: center; gap: 10px; transform: translateY(65px); transition: transform 0.4s ease;
         }
-        .project-card:hover .project-title {
-            transform: translateY(0);
-        }
+        .project-card:hover .project-title { transform: translateY(0); }
         .project-details {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-            max-height: 0;
-            overflow: hidden;
+            opacity: 0; transform: translateY(20px); transition: all 0.4s ease; max-height: 0; overflow: hidden;
         }
-        .project-card:hover .project-details {
-            opacity: 1;
-            transform: translateY(0);
-            max-height: 200px;
-            margin-top: 15px;
+        .project-card:hover .project-details { opacity: 1; transform: translateY(0); max-height: 200px; margin-top: 15px; }
+        .project-desc-text { color: #ccc; font-size: 0.95rem; margin-bottom: 15px; line-height: 1.4; }
+
+        /* --- BALÃO WHATSAPP FLUTUANTE --- */
+        .whatsapp-float {
+            position: fixed; width: 60px; height: 60px; bottom: 30px; right: 30px;
+            background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center;
+            font-size: 30px; box-shadow: 2px 2px 15px rgba(0,0,0,0.3); z-index: 1000;
+            display: flex; align-items: center; justify-content: center; text-decoration: none;
+            transition: all 0.3s ease; animation: pulse-wa 2s infinite;
         }
-        .project-desc-text {
-            color: #ccc;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            line-height: 1.4;
+        .whatsapp-float:hover { background-color: #128C7E; color: #FFF; transform: scale(1.1); }
+        @keyframes pulse-wa {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
         /* --- BOTÃO VOLTAR AO TOPO --- */
         #btnBackToTop {
-            position: fixed; bottom: 30px; right: 30px; display: none; z-index: 99;
+            position: fixed; bottom: 105px; right: 35px; display: none; z-index: 999;
             border-radius: 50%; width: 50px; height: 50px; font-size: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.3s;
         }
@@ -216,6 +194,7 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
+        /* --- RESPONSIVIDADE --- */
         @media (max-width: 991px) {
             .hero { text-align: center; }
             .hero-photo { width: 250px; height: 250px; margin-bottom: 30px; }
@@ -224,6 +203,8 @@
             .project-title { transform: translateY(0); margin-bottom: 10px;}
             .project-details { opacity: 1; transform: translateY(0); max-height: none; margin-top: 10px; }
             .project-card-img { opacity: 0.4; }
+            .whatsapp-float { width: 55px; height: 55px; bottom: 20px; right: 20px; font-size: 28px; }
+            #btnBackToTop { bottom: 90px; right: 22px; width: 45px; height: 45px; }
         }
     </style>
 </head>
@@ -512,7 +493,7 @@
             <h2 class="fw-bold mb-4">Vamos Construir Algo Juntos?</h2>
             <p class="lead mb-5">Estou aberto a oportunidades de trabalho e colaboração em projetos.</p>
             
-            <a href="mailto:seuemail@exemplo.com" class="btn btn-primary btn-lg px-5 me-md-3 mb-3 mb-md-0 shadow">
+            <a href="mailto:magalhaeskaua13@gmail.com" class="btn btn-primary btn-lg px-5 me-md-3 mb-3 mb-md-0 shadow">
                 <i class="bi bi-envelope-fill me-2"></i> Enviar E-mail
             </a>
             
@@ -527,6 +508,10 @@
             <small>&copy; 2026 Kauã da Silva. Todos os direitos reservados.</small>
         </div>
     </footer>
+
+    <a href="https://wa.me/5598985122030?text=Olá,%20Kauã!%20Vi%20o%20seu%20portfólio%20e%20gostaria%20de%20falar%20com%20você." class="whatsapp-float" target="_blank" title="Fale comigo no WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 
     <button id="btnBackToTop" class="btn btn-primary" title="Voltar ao topo">
         <i class="bi bi-arrow-up"></i>
@@ -585,7 +570,7 @@
 
         // Efeito Typing (Máquina de escrever)
         const typingText = document.getElementById('typing-text');
-        const phrases = ["Especialista em Java.", "Focado em Spring Boot.", "Criador de Soluções Escaláveis.", "Apaixonado por Clean Code."];
+        const phrases = ["Especialista em PHP e JAVA.", "Focado em Projetos com Spring Boot.", "Criador de Soluções Escaláveis.", "Apaixonado por Clean Code."];
         let phraseIndex = 0;
         let letterIndex = 0;
         let isDeleting = false;
