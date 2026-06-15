@@ -148,7 +148,7 @@
 
         /* --- NOVOS CARDS DE PROJETOS (IMAGE OVERLAY) --- */
         .project-card {
-            position: relative; height: 320px; border-radius: 15px; overflow: hidden;
+            position: relative; height: 350px; border-radius: 15px; overflow: hidden;
             border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background-color: #000;
         }
         .project-card-img {
@@ -157,21 +157,21 @@
         .project-card:hover .project-card-img { transform: scale(1.1); opacity: 0.4; }
         .project-overlay {
             position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(15,15,20,1) 10%, rgba(15,15,20,0.5) 60%, transparent 100%);
+            background: linear-gradient(to top, rgba(15,15,20,1) 10%, rgba(15,15,20,0.6) 60%, transparent 100%);
             height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
             padding: 25px; transition: background 0.4s ease;
         }
-        .project-card:hover .project-overlay { background: rgba(15, 15, 20, 0.7); }
+        .project-card:hover .project-overlay { background: rgba(15, 15, 20, 0.8); }
         .project-title {
             color: white; font-weight: 700; font-size: 1.3rem; margin-bottom: 0;
-            display: flex; align-items: center; gap: 10px; transform: translateY(65px); transition: transform 0.4s ease;
+            display: flex; align-items: center; gap: 10px; transform: translateY(80px); transition: transform 0.4s ease;
         }
         .project-card:hover .project-title { transform: translateY(0); }
         .project-details {
             opacity: 0; transform: translateY(20px); transition: all 0.4s ease; max-height: 0; overflow: hidden;
         }
-        .project-card:hover .project-details { opacity: 1; transform: translateY(0); max-height: 200px; margin-top: 15px; }
-        .project-desc-text { color: #ccc; font-size: 0.95rem; margin-bottom: 15px; line-height: 1.4; }
+        .project-card:hover .project-details { opacity: 1; transform: translateY(0); max-height: 250px; margin-top: 15px; }
+        .project-desc-text { color: #e9ecef; font-size: 0.9rem; margin-bottom: 15px; line-height: 1.4; }
 
         /* --- NOVA SEÇÃO: CERTIFICADOS --- */
         .cert-card {
@@ -233,7 +233,7 @@
 
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#home">&lt;MEU PORTIFÓLIO /&gt;</a>
+            <a class="navbar-brand fw-bold" href="#home">&lt;MEU PORTFÓLIO /&gt;</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -264,7 +264,7 @@
                     <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap mt-3">
                         <a href="#projetos" class="btn btn-primary btn-lg fw-bold px-4">Ver Portfólio</a>
                         <a href="https://github.com/kauasilvagg" target="_blank" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-github"></i> GitHub</a>
-                        <a href="curriculo.pdf" download="Curriculo_Kaua_Silva.pdf" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-file-earmark-pdf-fill me-1"></i> Baixar CV</a>
+                        <a href="Meu Contato.pdf" download="Curriculo_Kaua_Silva.pdf" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-file-earmark-pdf-fill me-1"></i> Baixar CV</a>
                     </div>
                 </div>
                 <div class="col-lg-5 order-1 order-lg-2 text-center reveal" style="transition-delay: 0.2s;">
@@ -309,7 +309,7 @@
                         <div class="tab-pane fade show active p-4 tab-content-box shadow-sm" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
                             <h4 class="fw-bold text-primary mb-3">Muito prazer, sou o Kauã.</h4>
                             <p class="fs-5 text-secondary">Sou estudante de Engenharia da Computação e atuo diretamente no desenvolvimento de soluções tecnológicas.</p>
-                            <p>Minha especialidade é conectar a lógica de baixo nível aprendida na engenharia com a agilidade do desenvolvimento web moderno. Não me considero apenas um "digitador de código", mas um solucionador de problemas reais de negócios. Tenho forte vivência com ecossistemas como <strong>Java, Spring Boot e PHP</strong>, sempre focado em entregar valor de forma mensurável.</p>
+                            <p>Minha especialidade é conectar a lógica de baixo nível aprendida na engenharia com a agilidade do desenvolvimento web moderno. Não me considero apenas um "digitador de código", mas um solucionador de problemas reais de negócios. Tenho forte vivência com ecossistemas como <strong>Java, Spring Boot e PHP</strong>, sempre focado em entregar valor de forma mensurável. Possuo Inglês Técnico, facilitando a leitura de documentações avançadas e o convívio em times globais.</p>
                         </div>
 
                         <div class="tab-pane fade p-4 tab-content-box shadow-sm" id="visao" role="tabpanel" aria-labelledby="visao-tab">
@@ -355,7 +355,7 @@
                                                 <small class="text-success fw-bold"><i class="bi bi-calendar-check me-1"></i> Formatura: Dezembro</small>
                                             </div>
                                         </div>
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -449,6 +449,21 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.6s;">
+                    <div class="skill-flip-card">
+                        <div class="skill-flip-card-inner">
+                            <div class="skill-flip-card-front">
+                                <i class="devicon-docker-plain"></i>
+                                <h5 class="fw-bold mt-3 mb-0">Infra & DevOps</h5>
+                            </div>
+                            <div class="skill-flip-card-back">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-hdd-network-fill"></i> Deploy</h6>
+                                <p>Conhecimento em Docker, Linux básico, AWS e automação de processos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -458,25 +473,28 @@
         <div class="container">
             <div class="text-center reveal mb-5">
                 <h2 class="section-title">Projetos em Destaque</h2>
-                <p class="text-muted">Aplicações práticas dos meus estudos e trabalhos.</p>
+                <p class="text-muted">Aplicações práticas solucionando problemas reais.</p>
             </div>
 
             <div class="row g-4">
                 
                 <div class="col-md-4 reveal" style="transition-delay: 0.1s;">
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ExtremeTours" class="project-card-img">
+                        <img src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ExtremeTours" class="project-card-img" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-title">
                                 <i class="bi bi-geo-alt fs-4 text-primary"></i> ExtremeTours
                             </div>
                             <div class="project-details">
-                                <p class="project-desc-text">Sistema de gerenciamento de passeios em São Luís e Regiões. Focado na experiência de gestão turística.</p>
+                                <p class="project-desc-text">Sistema que otimiza a gestão turística em São Luís, automatizando reservas e melhorando a experiência do cliente.</p>
                                 <div class="mb-3">
                                     <span class="badge bg-primary text-white">Java</span>
                                     <span class="badge bg-dark border border-secondary">Spring Boot</span>
                                 </div>
-                                <a href="https://github.com/kauasilvagg/extreme-tours/tree/master/src" target="_blank" class="btn btn-outline-light btn-sm w-100">Ver Código <i class="bi bi-github ms-1"></i></a>
+                                <div class="d-flex gap-2">
+                                    <a href="https://github.com/oM4real/extreme-tours" target="_blank" class="btn btn-outline-light btn-sm w-50">Código <i class="bi bi-github ms-1"></i></a>
+                                    <a href="#" target="_blank" class="btn btn-primary btn-sm w-50">Aplicação <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -484,18 +502,21 @@
 
                 <div class="col-md-4 reveal" style="transition-delay: 0.2s;">
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Site de Pagamentos" class="project-card-img">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Site de Pagamentos" class="project-card-img" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-title">
                                 <i class="bi bi-credit-card fs-4 text-primary"></i> Pagamentos
                             </div>
                             <div class="project-details">
-                                <p class="project-desc-text">Sistema robusto para realizar transações e pagamentos seguros com cartão e via PIX.</p>
+                                <p class="project-desc-text">Plataforma transacional segura que reduz atritos no checkout, suportando pagamentos instantâneos via PIX e cartão.</p>
                                 <div class="mb-3">
                                     <span class="badge bg-primary text-white">TypeScript</span>
                                     <span class="badge bg-dark border border-secondary">MySQL</span>
                                 </div>
-                                <a href="https://github.com/kauasilvagg/aprobrasil-pagamento-seguro-c2a1ddb1" target="_blank" class="btn btn-outline-light btn-sm w-100">Ver Código <i class="bi bi-github ms-1"></i></a>
+                                <div class="d-flex gap-2">
+                                    <a href="https://github.com/kauasilvagg/aprobrasil-pagamento-seguro-c2a1ddb1" target="_blank" class="btn btn-outline-light btn-sm w-50">Código <i class="bi bi-github ms-1"></i></a>
+                                    <a href="#" target="_blank" class="btn btn-primary btn-sm w-50">Aplicação <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -503,18 +524,21 @@
 
                 <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
                     <div class="project-card">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gestão de Empresa" class="project-card-img">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gestão de Empresa" class="project-card-img" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-title">
                                 <i class="bi bi-building fs-4 text-primary"></i> Gestão de Empresa
                             </div>
                             <div class="project-details">
-                                <p class="project-desc-text">Painel administrativo usado para gerenciar uma empresa aplicando filtros e regras complexas de negócio.</p>
+                                <p class="project-desc-text">Dashboard administrativo que centraliza dados corporativos, reduzindo o tempo de filtragem de métricas e tomada de decisão.</p>
                                 <div class="mb-3">
                                     <span class="badge bg-primary text-white">PHP</span>
                                     <span class="badge bg-dark border border-secondary">Hack</span>
                                 </div>
-                                <a href="https://github.com/kauasilvagg/dbempresa-codigos" target="_blank" class="btn btn-outline-light btn-sm w-100">Ver Código <i class="bi bi-github ms-1"></i></a>
+                                <div class="d-flex gap-2">
+                                    <a href="https://github.com/kauasilvagg/dbempresa-codigos" target="_blank" class="btn btn-outline-light btn-sm w-50">Código <i class="bi bi-github ms-1"></i></a>
+                                    <a href="#" target="_blank" class="btn btn-primary btn-sm w-50">Aplicação <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -552,7 +576,7 @@
                             <i class="bi bi-patch-check-fill fs-1 text-primary"></i>
                         </div>
                         <h5 class="fw-bold mb-2">Especialista Spring Boot & REST APIs</h5>
-                        <p class="text-muted small mb-4 flex-grow-1">Instituição: Alura<br>Carga Horária: 40h</p>
+                        <p class="text-muted small mb-4 flex-grow-1">Instituição: Universidade Ceuma<br>Carga Horária: 60h</p>
                         <button class="btn btn-outline-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCert2">
                             <i class="bi bi-eye-fill me-1"></i> Ver Certificado
                         </button>
@@ -564,8 +588,9 @@
                         <div class="mb-3">
                             <i class="bi bi-shield-check fs-1 text-success"></i>
                         </div>
-                        <h5 class="fw-bold mb-2">Bancos de Dados SQL e Modelagem</h5>
-                        <p class="text-muted small mb-4 flex-grow-1">Instituição: Fundação Bradesco<br>Carga Horária: 30h</p>
+                        <h5 class="fw-bold mb-2">DESENVOLVIMENTO DE APLICATIVOS MÓVEIS
+                         COM REACT NATIVE: DA INTERFACE AO CONSUMO DE APIS</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Instituição: Universidade Ceuma<br>Carga Horária: 60 horas</p>
                         <button class="btn btn-outline-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCert3">
                             <i class="bi bi-eye-fill me-1"></i> Ver Certificado
                         </button>
@@ -614,7 +639,7 @@
                 </div>
                 <div class="modal-body text-center pt-0 pb-4 px-4">
                     <h4 class="fw-bold text-primary mb-4">Java Completo Orientado a Objetos</h4>
-                    <img src="cert-java.jpg" alt="Certificado Java" class="img-fluid rounded shadow-sm border mb-4" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-java.jpg+na+pasta'">
+                    <img src="cert-java.jpg" alt="Certificado Java" class="img-fluid rounded shadow-sm border mb-4" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-java.jpg+na+pasta'">
                     <a href="#" target="_blank" class="btn btn-primary px-4"><i class="bi bi-link-45deg me-1"></i> Verificar Autenticidade no Site</a>
                 </div>
             </div>
@@ -629,7 +654,7 @@
                 </div>
                 <div class="modal-body text-center pt-0 pb-4 px-4">
                     <h4 class="fw-bold text-primary mb-4">Especialista Spring Boot & REST APIs</h4>
-                    <img src="cert-spring.jpg" alt="Certificado Spring" class="img-fluid rounded shadow-sm border mb-4" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-spring.jpg+na+pasta'">
+                    <img src="spring-cert.jpg" alt="Certificado Spring" class="img-fluid rounded shadow-sm border mb-4" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-spring.jpg+na+pasta'">
                     <a href="#" target="_blank" class="btn btn-primary px-4"><i class="bi bi-link-45deg me-1"></i> Verificar Autenticidade no Site</a>
                 </div>
             </div>
@@ -643,8 +668,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center pt-0 pb-4 px-4">
-                    <h4 class="fw-bold text-primary mb-4">Bancos de Dados SQL e Modelagem</h4>
-                    <img src="cert-sql.jpg" alt="Certificado Banco de Dados" class="img-fluid rounded shadow-sm border mb-4" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-sql.jpg+na+pasta'">
+                    <h4 class="fw-bold text-primary mb-4">DESENVOLVIMENTO DE APLICATIVOS MÓVEIS COM REACT NATIVE: DA INTERFACE AO CONSUMO DE APIS</h4>
+                    <img src="cert-react.jpg" alt="Certificado React" class="img-fluid rounded shadow-sm border mb-4" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-sql.jpg+na+pasta'">
                     <a href="#" target="_blank" class="btn btn-primary px-4"><i class="bi bi-link-45deg me-1"></i> Verificar Autenticidade no Site</a>
                 </div>
             </div>
