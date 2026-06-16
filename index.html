@@ -23,63 +23,90 @@
 
     <title>Portfólio | Kauã da Silva</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 
     <style>
         :root {
-            --primary-color: #0d6efd;
-            --dark-bg: #212529;
-            --success-glow: #20c997;
+            --primary-color: #00f2fe;
+            --secondary-color: #4facfe;
+            --bg-base: #0a0a0c;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
         }
         
         html { scroll-behavior: smooth; }
-        body { font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
         
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- BACKGROUND ANIMADO FIXO (ESTILO REACT/VERCEL) --- */
+        .ambient-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; pointer-events: none; overflow: hidden;
+            background: radial-gradient(circle at 15% 50%, rgba(79, 172, 254, 0.15), transparent 25%),
+                        radial-gradient(circle at 85% 30%, rgba(0, 242, 254, 0.1), transparent 25%);
+            animation: pulse-bg 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-bg {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* --- CUSTOM SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: rgba(79, 172, 254, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+
         /* --- ESTILOS DA NAVBAR --- */
-        .navbar { transition: all 0.4s ease; padding: 15px 0; }
+        .navbar { transition: all 0.4s ease; padding: 20px 0; background: transparent !important; }
         .navbar.scrolled {
             padding: 10px 0;
-            background-color: rgba(33, 37, 41, 0.95) !important;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            background: rgba(10, 10, 12, 0.8) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
         }
+        .navbar-brand { font-weight: 800; letter-spacing: 1px; background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-link { color: var(--text-main) !important; font-weight: 400; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary-color) !important; transform: translateY(-2px); }
+        .btn-primary { background: linear-gradient(45deg, var(--secondary-color), var(--primary-color)); border: none; font-weight: 600; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3); transition: 0.3s; color: #000 !important; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 242, 254, 0.5); }
+        .btn-outline-light { border: 1px solid var(--glass-border); background: var(--glass-bg); backdrop-filter: blur(5px); color: var(--text-main); }
+        .btn-outline-light:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
         /* --- HERO SECTION --- */
-        .hero {
-            background: linear-gradient(-45deg, rgba(15,15,20,0.95), rgba(13,110,253,0.3), rgba(32,201,151,0.2), rgba(15,15,20,0.95)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: 400% 400%;
-            background-position: center;
-            min-block-size: 100vh;
-            display: flex;
-            align-items: center;
-            color: white;
-            padding-block-start: 80px;
-            padding-block-end: 50px;
-            animation: gradientBG 15s ease infinite;
-        }
+        .hero { min-block-size: 100vh; display: flex; align-items: center; padding-block-start: 80px; padding-block-end: 50px; position: relative; }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Foto com anel brilhante animado */
+        .profile-photo-container { position: relative; display: inline-block; }
+        .profile-photo-container::before {
+            content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), transparent, transparent);
+            border-radius: 50%; z-index: -1; animation: spin 4s linear infinite;
         }
-
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        
         .hero-photo {
             inline-size: 300px; block-size: 300px; object-fit: cover; border-radius: 50%;
-            border: 5px solid var(--primary-color);
-            box-shadow: 0 0 30px rgba(13, 110, 253, 0.5);
-            animation: floating 3s ease-in-out infinite;
+            border: 4px solid var(--bg-base); background-color: var(--bg-base);
             transition: transform 0.3s ease;
         }
-        .hero-photo:hover { transform: scale(1.05); }
-
-        @keyframes floating {
-            0% { transform: translate(0,  0px); }
-            50% { transform: translate(0, 15px); }
-            100% { transform: translate(0, -0px); }
-        }
+        .hero-photo:hover { transform: scale(1.02); }
 
         /* --- EFEITO TYPING --- */
         .typing-cursor { font-weight: bold; font-size: 1.25rem; color: var(--primary-color); animation: blink 0.8s infinite; }
@@ -87,106 +114,112 @@
 
         /* --- BADGE DE ESTÁGIO PULSANTE --- */
         .estagio-badge {
-            display: inline-block; background: linear-gradient(45deg, #198754, #20c997);
-            color: white; padding: 10px 20px; border-radius: 50px;
-            font-weight: bold; font-size: 0.95rem; margin-block-end: 20px;
-            box-shadow: 0 0 15px rgba(32, 201, 151, 0.5);
-            animation: pulse-glow 2s infinite; border: 1px solid rgba(255,255,255,0.3);
-            transition: transform 0.3s ease;
+            display: inline-block; background: rgba(32, 201, 151, 0.1); border: 1px solid rgba(32, 201, 151, 0.4);
+            color: #20c997; padding: 8px 20px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; margin-block-end: 25px;
+            box-shadow: 0 0 15px rgba(32, 201, 151, 0.2); animation: pulse-glow 2s infinite; backdrop-filter: blur(5px);
         }
-        .estagio-badge:hover { transform: scale(1.05) translateY(-2px); cursor: default; }
 
         @keyframes pulse-glow {
-            0% { box-shadow: 0 0 0 0 rgba(32, 201, 151, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(32, 201, 151, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(32, 201, 151, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(32, 201, 151, 0); }
             100% { box-shadow: 0 0 0 0 rgba(32, 201, 151, 0); }
         }
 
         /* --- TÍTULOS DE SEÇÃO --- */
-        .section-title { position: relative; display: inline-block; margin-block-end: 3rem; font-weight: 700; }
+        .section-title { position: relative; display: inline-block; margin-block-end: 3rem; font-weight: 800; font-size: 2.5rem; letter-spacing: -0.5px; }
         .section-title::after {
-            content: ''; display: block; inline-size: 50%; block-size: 3px; background: var(--primary-color);
-            margin: 10px auto 0; transition: width 0.4s ease;
+            content: ''; display: block; inline-size: 40px; block-size: 4px; background: linear-gradient(90deg, var(--primary-color), transparent);
+            margin: 10px auto 0; border-radius: 2px;
         }
-        .section-title:hover::after { inline-size: 100%; }
+
+        /* --- GLASS CARDS (EFEITO REACT) --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
 
         /* --- TABS INTERATIVAS (SOBRE MIM) --- */
-        .custom-tabs { gap: 10px; }
+        .custom-tabs { background: var(--glass-bg); padding: 5px; border-radius: 50px; display: inline-flex; border: 1px solid var(--glass-border); }
         .custom-tabs .nav-link {
-            color: #555; border-radius: 50px; font-weight: 600; padding: 12px 25px;
-            transition: all 0.3s ease; border: 1px solid #e9ecef; background-color: white;
+            color: var(--text-muted); border-radius: 50px; font-weight: 600; padding: 10px 25px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .custom-tabs .nav-link:hover { color: var(--primary-color); background-color: rgba(13, 110, 253, 0.05); transform: translateY(-2px); }
-        .custom-tabs .nav-link.active {
-            background-color: var(--primary-color); color: white; border-color: var(--primary-color);
-            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3); transform: translateY(-2px);
-        }
-        .tab-content-box { border-left: 4px solid var(--primary-color); background-color: #f8f9fa; border-radius: 0 8px 8px 0; }
+        .custom-tabs .nav-link:hover { color: var(--text-main); }
+        .custom-tabs .nav-link.active { background: var(--glass-bg); color: var(--primary-color); border: 1px solid rgba(0, 242, 254, 0.3); box-shadow: 0 0 20px rgba(0, 242, 254, 0.1); }
+        
+        .tab-content-box { border-left: 3px solid var(--primary-color); border-radius: 0 15px 15px 0; padding: 2rem; }
 
         /* --- BARRA DE PROGRESSO ANIMADA --- */
-        .progress-bar {
-            transition: width 1.5s ease-in-out;
-        }
+        .progress { background-color: rgba(255,255,255,0.05); }
+        .progress-bar { background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); transition: width 1.5s ease-in-out; }
 
         /* --- FLIP CARDS 3D (STACKS) --- */
-        .skill-flip-card { background-color: transparent; height: 200px; perspective: 1000px; margin-bottom: 20px; }
-        .skill-flip-card-inner {
-            position: relative; width: 100%; height: 100%; text-align: center;
-            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d;
-        }
+        .skill-flip-card { background-color: transparent; height: 180px; perspective: 1000px; margin-bottom: 20px; }
+        .skill-flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; }
         .skill-flip-card:hover .skill-flip-card-inner { transform: rotateY(180deg); }
         .skill-flip-card-front, .skill-flip-card-back {
-            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
-            border-radius: 15px; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px;
         }
-        .skill-flip-card-front { background-color: white; border: 1px solid #eee; }
-        .skill-flip-card-front i { font-size: 4rem; color: #555; transition: color 0.3s; }
-        .skill-flip-card:hover .skill-flip-card-front i { color: var(--primary-color); }
-        .skill-flip-card-back { background-color: var(--primary-color); color: white; transform: rotateY(180deg); border: 1px solid var(--primary-color); padding: 15px; }
-        .skill-flip-card-back p { font-size: 0.9rem; line-height: 1.4; margin: 0; opacity: 0.9; }
+        .skill-flip-card-front { background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
+        .skill-flip-card-front i { font-size: 3.5rem; color: var(--text-muted); transition: all 0.4s; }
+        .skill-flip-card:hover .skill-flip-card-front i { color: var(--primary-color); filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.5)); transform: scale(1.1); }
+        .skill-flip-card-front h5 { color: var(--text-main); font-weight: 600; margin-top: 15px; }
+        
+        .skill-flip-card-back {
+            background: linear-gradient(135deg, rgba(79,172,254,0.1), rgba(0,242,254,0.1));
+            border: 1px solid rgba(0, 242, 254, 0.3); color: var(--text-main);
+            transform: rotateY(180deg); backdrop-filter: blur(10px);
+        }
+        .skill-flip-card-back h6 { color: var(--primary-color); }
+        .skill-flip-card-back p { font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); }
 
-        /* --- NOVOS CARDS DE PROJETOS (IMAGE OVERLAY) --- */
+        /* --- CARDS DE PROJETOS --- */
         .project-card {
-            position: relative; height: 350px; border-radius: 15px; overflow: hidden;
-            border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background-color: #000;
+            position: relative; height: 380px; border-radius: 20px; overflow: hidden;
+            border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .project-card-img {
-            width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease, opacity 0.4s ease; opacity: 0.8;
-        }
-        .project-card:hover .project-card-img { transform: scale(1.1); opacity: 0.4; }
+        .project-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease, opacity 0.4s ease; opacity: 0.6; }
+        .project-card:hover .project-card-img { transform: scale(1.05); opacity: 0.3; }
         .project-overlay {
             position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(15,15,20,1) 10%, rgba(15,15,20,0.6) 60%, transparent 100%);
+            background: linear-gradient(to top, rgba(10,10,12,1) 5%, rgba(10,10,12,0.7) 50%, transparent 100%);
             height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 25px; transition: background 0.4s ease;
+            padding: 30px; transition: background 0.4s ease;
         }
-        .project-card:hover .project-overlay { background: rgba(15, 15, 20, 0.8); }
+        .project-card:hover .project-overlay { background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(5px); }
         .project-title {
-            color: white; font-weight: 700; font-size: 1.3rem; margin-bottom: 0;
-            display: flex; align-items: center; gap: 10px; transform: translateY(80px); transition: transform 0.4s ease;
+            color: #fff; font-weight: 800; font-size: 1.4rem; margin-bottom: 0;
+            display: flex; align-items: center; gap: 10px; transform: translateY(80px); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .project-title i { color: var(--primary-color); }
         .project-card:hover .project-title { transform: translateY(0); }
-        .project-details {
-            opacity: 0; transform: translateY(20px); transition: all 0.4s ease; max-height: 0; overflow: hidden;
-        }
+        .project-details { opacity: 0; transform: translateY(20px); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); max-height: 0; overflow: hidden; }
         .project-card:hover .project-details { opacity: 1; transform: translateY(0); max-height: 250px; margin-top: 15px; }
-        .project-desc-text { color: #e9ecef; font-size: 0.9rem; margin-bottom: 15px; line-height: 1.4; }
+        .project-desc-text { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .badge { background: rgba(255,255,255,0.05) !important; border: 1px solid var(--glass-border) !important; color: var(--primary-color) !important; font-weight: 500; padding: 6px 12px; }
 
-        /* --- NOVA SEÇÃO: CERTIFICADOS --- */
-        .cert-card {
-            transition: all 0.3s ease; border: 1px solid #eee; position: relative; overflow: hidden; z-index: 1;
-        }
-        .cert-card:hover {
-            transform: translateY(-8px); border-color: var(--primary-color);
-            box-shadow: 0 15px 30px rgba(13, 110, 253, 0.1) !important;
-        }
+        /* --- CERTIFICADOS --- */
+        .cert-card { transition: all 0.4s ease; position: relative; overflow: hidden; z-index: 1; }
+        .cert-card:hover { transform: translateY(-8px); border-color: rgba(0, 242, 254, 0.3); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.1); }
         .cert-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: var(--primary-color); transform: scaleX(0); transition: transform 0.4s ease;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); transform: scaleX(0); transition: transform 0.5s ease;
             transform-origin: left; z-index: -1;
         }
         .cert-card:hover::before { transform: scaleX(1); }
+
+        /* --- TEXTOS E UTILITÁRIOS --- */
+        .text-muted { color: var(--text-muted) !important; }
+        .text-dark { color: var(--text-main) !important; } /* Sobrescrevendo bootstrap */
+
+        /* --- MODAIS --- */
+        .modal-content { background-color: var(--bg-base); border: 1px solid var(--glass-border); border-radius: 20px; }
+        .modal-header .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
 
         /* --- BALÃO WHATSAPP FLUTUANTE --- */
         .whatsapp-float {
@@ -197,22 +230,18 @@
             transition: all 0.3s ease; animation: pulse-wa 2s infinite;
         }
         .whatsapp-float:hover { background-color: #128C7E; color: #FFF; transform: scale(1.1); }
-        @keyframes pulse-wa {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
 
         /* --- BOTÃO VOLTAR AO TOPO --- */
         #btnBackToTop {
             position: fixed; bottom: 105px; right: 35px; display: none; z-index: 999;
             border-radius: 50%; width: 50px; height: 50px; font-size: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.3s;
+            background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--primary-color);
+            backdrop-filter: blur(5px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s;
         }
-        #btnBackToTop:hover { transform: translateY(-5px); }
+        #btnBackToTop:hover { transform: translateY(-5px); background: rgba(0, 242, 254, 0.1); }
 
         /* --- SCROLL REVEAL --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- RESPONSIVIDADE --- */
@@ -220,10 +249,9 @@
             .hero { text-align: center; }
             .hero-photo { width: 250px; height: 250px; margin-bottom: 30px; }
             .d-flex.gap-3 { justify-content: center !important; }
-            .custom-tabs { flex-direction: column; }
             .project-title { transform: translateY(0); margin-bottom: 10px;}
             .project-details { opacity: 1; transform: translateY(0); max-height: none; margin-top: 10px; }
-            .project-card-img { opacity: 0.4; }
+            .project-card-img { opacity: 0.3; }
             .whatsapp-float { width: 55px; height: 55px; bottom: 20px; right: 20px; font-size: 28px; }
             #btnBackToTop { bottom: 90px; right: 22px; width: 45px; height: 45px; }
         }
@@ -231,20 +259,22 @@
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar">
 
+    <div class="ambient-bg"></div>
+
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#home">&lt;MEU PORTFÓLIO /&gt;</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand" href="#home">&lt;KAUÃ.DEV /&gt;</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav align-items-center gap-2">
                     <li class="nav-item"><a class="nav-link" href="#home">Início</a></li>
                     <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Stack</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projetos">Projetos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#certificados">Certificados</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary ms-lg-3 mt-2 mt-lg-0 text-white px-4" href="#contato">Contato</a></li>
+                    <li class="nav-item ms-lg-2"><a class="btn btn-outline-light rounded-pill px-4 py-2" href="#contato" style="font-size: 0.9rem;">Contato</a></li>
                 </ul>
             </div>
         </div>
@@ -257,102 +287,99 @@
                     <div class="estagio-badge" title="Atuando com tecnologia no setor público">
                         <i class="bi bi-laptop me-2"></i> Estágio Atual: Assembleia Legislativa do Maranhão
                     </div>
-                    <h1 class="display-3 fw-bold mb-2">KAUÃ DA SILVA</h1>
-                    <p class="lead mb-4 text-light opacity-75" style="min-height: 30px;">
-                        Desenvolvedor de Software | <span id="typing-text" class="text-white fw-bold"></span><span class="typing-cursor">|</span>
+                    <h1 class="display-3 fw-bold mb-2 text-white">KAUÃ DA SILVA</h1>
+                    <p class="lead mb-4 text-muted" style="min-height: 30px; font-size: 1.3rem;">
+                        Software Engineer | <span id="typing-text" style="color: var(--text-main);"></span><span class="typing-cursor">|</span>
                     </p>
-                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap mt-3">
-                        <a href="#projetos" class="btn btn-primary btn-lg fw-bold px-4">Ver Portfólio</a>
-                        <a href="https://github.com/kauasilvagg" target="_blank" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-github"></i> GitHub</a>
-                        <a href="Meu Contato.pdf" download="Curriculo_Kaua_Silva.pdf" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-file-earmark-pdf-fill me-1"></i> Baixar CV</a>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap mt-4">
+                        <a href="#projetos" class="btn btn-primary rounded-pill px-5 py-3">Ver Portfólio</a>
+                        <a href="https://github.com/kauasilvagg" target="_blank" class="btn btn-outline-light rounded-pill px-4 py-3"><i class="bi bi-github"></i> GitHub</a>
+                        <a href="Meu Contato.pdf" download="Curriculo_Kaua_Silva.pdf" class="btn btn-outline-light rounded-pill px-4 py-3"><i class="bi bi-file-earmark-pdf-fill me-1"></i> CV</a>
                     </div>
                 </div>
                 <div class="col-lg-5 order-1 order-lg-2 text-center reveal" style="transition-delay: 0.2s;">
                     <div class="profile-photo-container">
-                        <img src="69eb1dc7-e994-4513-9968-feed2156e40e.jpg" alt="Foto de Kauã" class="hero-photo img-fluid">
+                        <img src="69eb1dc7-e994-4513-9968-feed2156e40e.jpg" alt="Foto de Kauã" class="hero-photo" loading="lazy">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="sobre" class="py-5">
+    <section id="sobre" class="py-5" style="position: relative; z-index: 1;">
         <div class="container py-5">
             <div class="text-center reveal mb-5">
-                <h2 class="section-title">Sobre Mim</h2>
-                <p class="lead text-muted">Conheça o profissional por trás do código.</p>
+                <h2 class="section-title text-white">Sobre Mim</h2>
+                <p class="text-muted">Conheça o profissional por trás do código.</p>
             </div>
 
             <div class="row align-items-center reveal" style="transition-delay: 0.1s;">
                 <div class="col-lg-10 mx-auto">
                     
-                    <ul class="nav nav-pills justify-content-center mb-4 custom-tabs" id="sobreTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="perfil-tab" data-bs-toggle="pill" data-bs-target="#perfil" type="button" role="tab" aria-selected="true">
-                                <i class="bi bi-person-lines-fill me-2"></i> O Profissional
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="visao-tab" data-bs-toggle="pill" data-bs-target="#visao" type="button" role="tab" aria-selected="false">
-                                <i class="bi bi-code-square me-2"></i> Visão Técnica
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="trajetoria-tab" data-bs-toggle="pill" data-bs-target="#trajetoria" type="button" role="tab" aria-selected="false">
-                                <i class="bi bi-rocket-takeoff-fill me-2"></i> Trajetória
-                            </button>
-                        </li>
-                    </ul>
+                    <div class="text-center mb-4">
+                        <ul class="nav nav-pills custom-tabs" id="sobreTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="perfil-tab" data-bs-toggle="pill" data-bs-target="#perfil" type="button" role="tab">
+                                    <i class="bi bi-person-lines-fill me-2"></i> Perfil
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="visao-tab" data-bs-toggle="pill" data-bs-target="#visao" type="button" role="tab">
+                                    <i class="bi bi-code-square me-2"></i> Visão Técnica
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="trajetoria-tab" data-bs-toggle="pill" data-bs-target="#trajetoria" type="button" role="tab">
+                                    <i class="bi bi-rocket-takeoff-fill me-2"></i> Trajetória
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
 
                     <div class="tab-content" id="sobreTabsContent">
                         
-                        <div class="tab-pane fade show active p-4 tab-content-box shadow-sm" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
-                            <h4 class="fw-bold text-primary mb-3">Muito prazer, sou o Kauã.</h4>
-                            <p class="fs-5 text-secondary">Sou estudante de Engenharia da Computação e atuo diretamente no desenvolvimento de soluções tecnológicas.</p>
-                            <p>Minha especialidade é conectar a lógica de baixo nível aprendida na engenharia com a agilidade do desenvolvimento web moderno. Não me considero apenas um "digitador de código", mas um solucionador de problemas reais de negócios. Tenho forte vivência com ecossistemas como <strong>Java, Spring Boot e PHP</strong>, sempre focado em entregar valor de forma mensurável. Possuo Inglês Técnico, facilitando a leitura de documentações avançadas e o convívio em times globais.</p>
+                        <div class="tab-pane fade show active p-5 glass-card tab-content-box" id="perfil" role="tabpanel">
+                            <h4 class="fw-bold mb-3" style="color: var(--primary-color);">Muito prazer, sou o Kauã.</h4>
+                            <p class="fs-5" style="color: var(--text-main);">Sou estudante de Engenharia da Computação e atuo diretamente no desenvolvimento de soluções tecnológicas.</p>
+                            <p class="text-muted">Minha especialidade é conectar a lógica de baixo nível aprendida na engenharia com a agilidade do desenvolvimento web moderno. Não me considero apenas um "digitador de código", mas um solucionador de problemas de negócios. Tenho forte vivência com <strong>Java, Spring Boot e PHP</strong>. Possuo Inglês Técnico, facilitando a leitura de documentações avançadas e o convívio em times globais.</p>
                         </div>
 
-                        <div class="tab-pane fade p-4 tab-content-box shadow-sm" id="visao" role="tabpanel" aria-labelledby="visao-tab">
-                            <h4 class="fw-bold text-primary mb-3">Qualidade acima de quantidade.</h4>
-                            <p>Meu foco atual é o desenvolvimento de sistemas robustos e escaláveis. Acredito que código bom é código legível por outros desenvolvedores.</p>
-                            <ul class="list-unstyled mt-3">
-                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>Clean Code:</strong> Manutenção e refatoração são parte natural do meu processo.</li>
-                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>Bancos de Dados:</strong> Modelagem relacional sólida com MySQL e PostgreSQL.</li>
-                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>Arquitetura:</strong> Focado em boas práticas (SOLID, Design Patterns) aplicadas em Spring Boot e ecossistemas corporativos.</li>
+                        <div class="tab-pane fade p-5 glass-card tab-content-box" id="visao" role="tabpanel">
+                            <h4 class="fw-bold mb-3" style="color: var(--primary-color);">Qualidade acima de quantidade.</h4>
+                            <p class="text-muted">Meu foco atual é o desenvolvimento de sistemas robustos e escaláveis. Acredito que código bom é código legível por outros desenvolvedores.</p>
+                            <ul class="list-unstyled mt-4 text-muted">
+                                <li class="mb-3"><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> <strong>Clean Code:</strong> Manutenção e refatoração são parte natural do meu processo.</li>
+                                <li class="mb-3"><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> <strong>Bancos de Dados:</strong> Modelagem relacional sólida com MySQL e PostgreSQL.</li>
+                                <li class="mb-3"><i class="bi bi-check-circle-fill me-2" style="color: var(--primary-color);"></i> <strong>Arquitetura:</strong> Focado em boas práticas (SOLID, Design Patterns) aplicadas em Spring Boot e ecossistemas corporativos.</li>
                             </ul>
                         </div>
 
-                        <div class="tab-pane fade" id="trajetoria" role="tabpanel" aria-labelledby="trajetoria-tab">
-                            <div class="row g-4 mt-2">
+                        <div class="tab-pane fade" id="trajetoria" role="tabpanel">
+                            <div class="row g-4 mt-1">
                                 <div class="col-md-6">
-                                    <div class="p-4 bg-white border rounded shadow-sm h-100 position-relative">
-                                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-10 rounded" style="z-index: 0;"></div>
-                                        <div class="position-relative" style="z-index: 1;">
-                                            <i class="bi bi-briefcase-fill fs-1 text-primary mb-3 d-block"></i>
-                                            <h5 class="fw-bold mb-1">Assembleia Legislativa do MA</h5>
-                                            <span class="badge bg-success mb-3">Estágio Atual</span>
-                                            <p class="text-muted">Atuação direta como Estagiário de TI, auxiliando no ecossistema tecnológico do setor público com responsabilidade e visão analítica.</p>
-                                        </div>
+                                    <div class="p-4 glass-card h-100 position-relative">
+                                        <i class="bi bi-briefcase-fill fs-2 mb-3 d-block" style="color: var(--primary-color);"></i>
+                                        <h5 class="fw-bold mb-2 text-white">Assembleia Legislativa do MA</h5>
+                                        <span class="badge mb-3">Estágio Atual</span>
+                                        <p class="text-muted text-sm">Atuação direta como Estagiário de TI, auxiliando no ecossistema tecnológico do setor público com responsabilidade e visão analítica.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="p-4 bg-white border rounded shadow-sm h-100 d-flex flex-column">
-                                        <i class="bi bi-mortarboard-fill fs-1 text-primary mb-3 d-block"></i>
-                                        <h5 class="fw-bold mb-1">Engenharia da Computação</h5>
-                                        <div class="mb-3">
-                                            <span class="badge bg-secondary">Bacharelado em Andamento</span>
-                                        </div>
-                                        <p class="text-muted flex-grow-1">Formação sólida que me garante entender como a tecnologia funciona "por baixo do capô", de hardware até arquitetura de software distribuído.</p>
+                                    <div class="p-4 glass-card h-100 d-flex flex-column">
+                                        <i class="bi bi-mortarboard-fill fs-2 mb-3 d-block" style="color: var(--primary-color);"></i>
+                                        <h5 class="fw-bold mb-2 text-white">Engenharia da Computação</h5>
+                                        <div class="mb-3"><span class="badge">Bacharelado em Andamento</span></div>
+                                        <p class="text-muted text-sm flex-grow-1">Formação sólida que me garante entender a tecnologia "por baixo do capô", de hardware até software distribuído.</p>
                                         
-                                        <div class="mt-3 pt-3 border-top">
+                                        <div class="mt-3 pt-3" style="border-top: 1px solid var(--glass-border);">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <span class="fw-bold text-dark fs-6 small">Progresso: 7º Período (87.5%)</span>
+                                                <span class="fw-bold fs-6 small text-white">Progresso: 7º Período (87.5%)</span>
                                             </div>
-                                            <div class="progress" style="height: 12px; border-radius: 50px; background-color: #e9ecef;">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 87.5%; border-radius: 50px;" aria-valuenow="87.5" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress" style="height: 8px; border-radius: 50px;">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 87.5%;" aria-valuenow="87.5" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                             <div class="text-end mt-2">
-                                                <small class="text-success fw-bold"><i class="bi bi-calendar-check me-1"></i> Formatura: Dezembro</small>
+                                                <small style="color: var(--primary-color);"><i class="bi bi-calendar-check me-1"></i> Formatura: Dezembro</small>
                                             </div>
                                         </div>
                                     </div>
@@ -366,11 +393,11 @@
         </div>
     </section>
 
-    <section id="skills" class="py-5 bg-light">
+    <section id="skills" class="py-5" style="position: relative; z-index: 1;">
         <div class="container">
             <div class="text-center reveal mb-5">
-                <h2 class="section-title">Minha Stack</h2>
-                <p class="text-muted">Passe o mouse sobre as tecnologias para ver como eu as aplico.</p>
+                <h2 class="section-title text-white">Tecnologias</h2>
+                <p class="text-muted">Passe o mouse sobre os ícones.</p>
             </div>
             
             <div class="row justify-content-center">
@@ -378,13 +405,13 @@
                 <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.1s;">
                     <div class="skill-flip-card">
                         <div class="skill-flip-card-inner">
-                            <div class="skill-flip-card-front">
+                            <div class="skill-flip-card-front glass-card">
                                 <i class="devicon-java-plain"></i>
-                                <h5 class="fw-bold mt-3 mb-0">Java</h5>
+                                <h5>Java</h5>
                             </div>
-                            <div class="skill-flip-card-back">
+                            <div class="skill-flip-card-back glass-card">
                                 <h6 class="fw-bold mb-2"><i class="bi bi-cup-hot-fill"></i> Java</h6>
-                                <p>Criação de APIs corporativas, Orientação a Objetos avançada e lógica backend.</p>
+                                <p>Criação de APIs, Orientação a Objetos avançada e lógica backend.</p>
                             </div>
                         </div>
                     </div>
@@ -393,13 +420,13 @@
                 <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.2s;">
                     <div class="skill-flip-card">
                         <div class="skill-flip-card-inner">
-                            <div class="skill-flip-card-front">
+                            <div class="skill-flip-card-front glass-card">
                                 <i class="devicon-spring-plain"></i>
-                                <h5 class="fw-bold mt-3 mb-0">Spring Boot</h5>
+                                <h5>Spring Boot</h5>
                             </div>
-                            <div class="skill-flip-card-back">
+                            <div class="skill-flip-card-back glass-card">
                                 <h6 class="fw-bold mb-2"><i class="bi bi-gear-fill"></i> Spring</h6>
-                                <p>Microsserviços, injeção de dependências e segurança com Spring Security.</p>
+                                <p>Microsserviços, injeção de dependências e segurança.</p>
                             </div>
                         </div>
                     </div>
@@ -408,13 +435,13 @@
                 <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.3s;">
                     <div class="skill-flip-card">
                         <div class="skill-flip-card-inner">
-                            <div class="skill-flip-card-front">
+                            <div class="skill-flip-card-front glass-card">
                                 <i class="devicon-postgresql-plain"></i>
-                                <h5 class="fw-bold mt-3 mb-0">PostgreSQL</h5>
+                                <h5>PostgreSQL</h5>
                             </div>
-                            <div class="skill-flip-card-back">
-                                <h6 class="fw-bold mb-2"><i class="bi bi-database-fill"></i> Banco de Dados</h6>
-                                <p>Modelagem relacional, queries otimizadas e garantia de integridade de dados.</p>
+                            <div class="skill-flip-card-back glass-card">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-database-fill"></i> Dados</h6>
+                                <p>Modelagem relacional, queries otimizadas e integridade.</p>
                             </div>
                         </div>
                     </div>
@@ -423,13 +450,13 @@
                 <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.4s;">
                     <div class="skill-flip-card">
                         <div class="skill-flip-card-inner">
-                            <div class="skill-flip-card-front">
-                                <i class="devicon-git-plain"></i>
-                                <h5 class="fw-bold mt-3 mb-0">Git & GitHub</h5>
+                            <div class="skill-flip-card-front glass-card">
+                                <i class="devicon-php-plain"></i>
+                                <h5>PHP & Hack</h5>
                             </div>
-                            <div class="skill-flip-card-back">
-                                <h6 class="fw-bold mb-2"><i class="bi bi-git"></i> Versionamento</h6>
-                                <p>Controle de código fluido, resolução de conflitos e trabalho em equipe estruturado.</p>
+                            <div class="skill-flip-card-back glass-card">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-filetype-php"></i> Web</h6>
+                                <p>Manutenção ágil, rotas, scripts e regras de negócio complexas.</p>
                             </div>
                         </div>
                     </div>
@@ -438,28 +465,28 @@
                 <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.5s;">
                     <div class="skill-flip-card">
                         <div class="skill-flip-card-inner">
-                            <div class="skill-flip-card-front">
-                                <i class="devicon-php-plain"></i>
-                                <h5 class="fw-bold mt-3 mb-0">PHP & Hack</h5>
+                            <div class="skill-flip-card-front glass-card">
+                                <i class="devicon-git-plain"></i>
+                                <h5>Git/GitHub</h5>
                             </div>
-                            <div class="skill-flip-card-back">
-                                <h6 class="fw-bold mb-2"><i class="bi bi-filetype-php"></i> Backend Web</h6>
-                                <p>Manutenção ágil, criação de rotas, scripts de backend e regras de negócio.</p>
+                            <div class="skill-flip-card-back glass-card">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-git"></i> Versionamento</h6>
+                                <p>Controle fluido, resolução de conflitos e CI/CD.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-6 col-md-4 col-lg-2 reveal" style="transition-delay: 0.6s;">
                     <div class="skill-flip-card">
                         <div class="skill-flip-card-inner">
-                            <div class="skill-flip-card-front">
+                            <div class="skill-flip-card-front glass-card">
                                 <i class="devicon-docker-plain"></i>
-                                <h5 class="fw-bold mt-3 mb-0">Infra & DevOps</h5>
+                                <h5>DevOps</h5>
                             </div>
-                            <div class="skill-flip-card-back">
-                                <h6 class="fw-bold mb-2"><i class="bi bi-hdd-network-fill"></i> Deploy</h6>
-                                <p>Conhecimento em Docker, Linux básico, AWS e automação de processos.</p>
+                            <div class="skill-flip-card-back glass-card">
+                                <h6 class="fw-bold mb-2"><i class="bi bi-hdd-network-fill"></i> Infra</h6>
+                                <p>Containers Docker, Linux básico, AWS e automação.</p>
                             </div>
                         </div>
                     </div>
@@ -469,10 +496,10 @@
         </div>
     </section>
 
-    <section id="projetos" class="py-5">
+    <section id="projetos" class="py-5" style="position: relative; z-index: 1;">
         <div class="container">
             <div class="text-center reveal mb-5">
-                <h2 class="section-title">Projetos em Destaque</h2>
+                <h2 class="section-title text-white">Projetos em Destaque</h2>
                 <p class="text-muted">Aplicações práticas solucionando problemas reais.</p>
             </div>
 
@@ -483,17 +510,17 @@
                         <img src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ExtremeTours" class="project-card-img" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-title">
-                                <i class="bi bi-geo-alt fs-4 text-primary"></i> ExtremeTours
+                                <i class="bi bi-geo-alt"></i> ExtremeTours
                             </div>
                             <div class="project-details">
                                 <p class="project-desc-text">Sistema que otimiza a gestão turística em São Luís, automatizando reservas e melhorando a experiência do cliente.</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-primary text-white">Java</span>
-                                    <span class="badge bg-dark border border-secondary">Spring Boot</span>
+                                <div class="mb-4">
+                                    <span class="badge">Java</span>
+                                    <span class="badge">Spring Boot</span>
                                 </div>
                                 <div class="d-flex gap-2">
-                                    <a href="https://github.com/oM4real/extreme-tours" target="_blank" class="btn btn-outline-light btn-sm w-50">Código <i class="bi bi-github ms-1"></i></a>
-                                    <a href="#" target="_blank" class="btn btn-primary btn-sm w-50">Aplicação <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                                    <a href="https://github.com/oM4real/extreme-tours" target="_blank" class="btn btn-outline-light btn-sm w-50 py-2 rounded-pill">Código <i class="bi bi-github ms-1"></i></a>
+                                    <a href="#" target="_blank" class="btn btn-primary btn-sm w-50 py-2 rounded-pill">Deploy <i class="bi bi-box-arrow-up-right ms-1"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -505,17 +532,17 @@
                         <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Site de Pagamentos" class="project-card-img" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-title">
-                                <i class="bi bi-credit-card fs-4 text-primary"></i> Pagamentos
+                                <i class="bi bi-credit-card"></i> Pagamentos
                             </div>
                             <div class="project-details">
                                 <p class="project-desc-text">Plataforma transacional segura que reduz atritos no checkout, suportando pagamentos instantâneos via PIX e cartão.</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-primary text-white">TypeScript</span>
-                                    <span class="badge bg-dark border border-secondary">MySQL</span>
+                                <div class="mb-4">
+                                    <span class="badge">TypeScript</span>
+                                    <span class="badge">MySQL</span>
                                 </div>
                                 <div class="d-flex gap-2">
-                                    <a href="https://github.com/kauasilvagg/aprobrasil-pagamento-seguro-c2a1ddb1" target="_blank" class="btn btn-outline-light btn-sm w-50">Código <i class="bi bi-github ms-1"></i></a>
-                                    <a href="#" target="_blank" class="btn btn-primary btn-sm w-50">Aplicação <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                                    <a href="https://github.com/kauasilvagg/aprobrasil-pagamento-seguro-c2a1ddb1" target="_blank" class="btn btn-outline-light btn-sm w-50 py-2 rounded-pill">Código <i class="bi bi-github ms-1"></i></a>
+                                    <a href="#" target="_blank" class="btn btn-primary btn-sm w-50 py-2 rounded-pill">Deploy <i class="bi bi-box-arrow-up-right ms-1"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -527,17 +554,17 @@
                         <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gestão de Empresa" class="project-card-img" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-title">
-                                <i class="bi bi-building fs-4 text-primary"></i> Gestão de Empresa
+                                <i class="bi bi-building"></i> Gestão de Empresa
                             </div>
                             <div class="project-details">
-                                <p class="project-desc-text">Dashboard administrativo que centraliza dados corporativos, reduzindo o tempo de filtragem de métricas e tomada de decisão.</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-primary text-white">PHP</span>
-                                    <span class="badge bg-dark border border-secondary">Hack</span>
+                                <p class="project-desc-text">Dashboard administrativo que centraliza dados corporativos, reduzindo o tempo de filtragem de métricas de negócio.</p>
+                                <div class="mb-4">
+                                    <span class="badge">PHP</span>
+                                    <span class="badge">Hack</span>
                                 </div>
                                 <div class="d-flex gap-2">
-                                    <a href="https://github.com/kauasilvagg/dbempresa-codigos" target="_blank" class="btn btn-outline-light btn-sm w-50">Código <i class="bi bi-github ms-1"></i></a>
-                                    <a href="#" target="_blank" class="btn btn-primary btn-sm w-50">Aplicação <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                                    <a href="https://github.com/kauasilvagg/dbempresa-codigos" target="_blank" class="btn btn-outline-light btn-sm w-50 py-2 rounded-pill">Código <i class="bi bi-github ms-1"></i></a>
+                                    <a href="#" target="_blank" class="btn btn-primary btn-sm w-50 py-2 rounded-pill">Deploy <i class="bi bi-box-arrow-up-right ms-1"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -548,50 +575,43 @@
         </div>
     </section>
 
-    <section id="certificados" class="py-5 bg-light">
+    <section id="certificados" class="py-5" style="position: relative; z-index: 1;">
         <div class="container py-4">
             <div class="text-center reveal mb-5">
-                <h2 class="section-title">Certificações</h2>
+                <h2 class="section-title text-white">Certificações</h2>
                 <p class="text-muted">Cursos e especializações que validam meu conhecimento.</p>
             </div>
 
             <div class="row justify-content-center g-4">
                 
                 <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.1s;">
-                    <div class="cert-card p-4 bg-white rounded shadow-sm text-center h-100 d-flex flex-column">
-                        <div class="mb-3">
-                            <i class="bi bi-award-fill fs-1 text-warning"></i>
-                        </div>
-                        <h5 class="fw-bold mb-2">Java Completo Orientado a Objetos</h5>
+                    <div class="cert-card p-4 glass-card text-center h-100 d-flex flex-column">
+                        <div class="mb-3"><i class="bi bi-award-fill fs-1" style="color: var(--primary-color);"></i></div>
+                        <h5 class="fw-bold mb-2 text-white">Java Completo (OO)</h5>
                         <p class="text-muted small mb-4 flex-grow-1">Instituição: Udemy / Prof. Nélio Alves<br>Carga Horária: 50h</p>
-                        <button class="btn btn-outline-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCert1">
+                        <button class="btn btn-outline-light btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCert1">
                             <i class="bi bi-eye-fill me-1"></i> Ver Certificado
                         </button>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.2s;">
-                    <div class="cert-card p-4 bg-white rounded shadow-sm text-center h-100 d-flex flex-column">
-                        <div class="mb-3">
-                            <i class="bi bi-patch-check-fill fs-1 text-primary"></i>
-                        </div>
-                        <h5 class="fw-bold mb-2">Especialista Spring Boot & REST APIs</h5>
+                    <div class="cert-card p-4 glass-card text-center h-100 d-flex flex-column">
+                        <div class="mb-3"><i class="bi bi-patch-check-fill fs-1" style="color: var(--primary-color);"></i></div>
+                        <h5 class="fw-bold mb-2 text-white">Spring Boot & REST APIs</h5>
                         <p class="text-muted small mb-4 flex-grow-1">Instituição: Universidade Ceuma<br>Carga Horária: 60h</p>
-                        <button class="btn btn-outline-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCert2">
+                        <button class="btn btn-outline-light btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCert2">
                             <i class="bi bi-eye-fill me-1"></i> Ver Certificado
                         </button>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.3s;">
-                    <div class="cert-card p-4 bg-white rounded shadow-sm text-center h-100 d-flex flex-column">
-                        <div class="mb-3">
-                            <i class="bi bi-shield-check fs-1 text-success"></i>
-                        </div>
-                        <h5 class="fw-bold mb-2">DESENVOLVIMENTO DE APLICATIVOS MÓVEIS
-                         COM REACT NATIVE: DA INTERFACE AO CONSUMO DE APIS</h5>
-                        <p class="text-muted small mb-4 flex-grow-1">Instituição: Universidade Ceuma<br>Carga Horária: 60 horas</p>
-                        <button class="btn btn-outline-primary btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCert3">
+                    <div class="cert-card p-4 glass-card text-center h-100 d-flex flex-column">
+                        <div class="mb-3"><i class="bi bi-shield-check fs-1" style="color: var(--primary-color);"></i></div>
+                        <h5 class="fw-bold mb-2 text-white">React Native: Mobile</h5>
+                        <p class="text-muted small mb-4 flex-grow-1">Instituição: Universidade Ceuma<br>Carga Horária: 60h</p>
+                        <button class="btn btn-outline-light btn-sm rounded-pill w-100 fw-bold" data-bs-toggle="modal" data-bs-target="#modalCert3">
                             <i class="bi bi-eye-fill me-1"></i> Ver Certificado
                         </button>
                     </div>
@@ -601,24 +621,24 @@
         </div>
     </section>
 
-    <section id="contato" class="py-5 bg-dark text-white text-center">
-        <div class="container py-5 reveal">
-            <h2 class="fw-bold mb-4">Vamos Construir Algo Juntos?</h2>
-            <p class="lead mb-5">Estou aberto a oportunidades de trabalho e colaboração em projetos.</p>
+    <section id="contato" class="py-5 text-white text-center" style="position: relative; z-index: 1; border-top: 1px solid var(--glass-border);">
+        <div class="container py-5 reveal glass-card" style="max-width: 800px; padding: 3rem !important;">
+            <h2 class="fw-bold mb-3 text-white">Vamos Construir Algo Juntos?</h2>
+            <p class="text-muted mb-5">Estou aberto a novas oportunidades e desafios técnicos de alto nível.</p>
             
-            <a href="mailto:SEU-EMAIL-AQUI@GMAIL.COM" class="btn btn-primary btn-lg px-5 me-md-3 mb-3 mb-md-0 shadow">
-                <i class="bi bi-envelope-fill me-2"></i> Enviar E-mail
+            <a href="mailto:magalhaeskaua13@gmail.com" class="btn btn-primary rounded-pill px-5 py-3 me-md-3 mb-3 mb-md-0">
+                <i class="bi bi-envelope-fill me-2"></i> Me mande um E-mail
             </a>
             
-            <a href="https://www.linkedin.com/in/kauã-magalhães-3b2182272" target="_blank" class="btn btn-outline-light btn-lg px-5 shadow">
+            <a href="https://www.linkedin.com/in/kauã-magalhães-3b2182272" target="_blank" class="btn btn-outline-light rounded-pill px-5 py-3">
                 <i class="bi bi-linkedin me-2"></i> LinkedIn
             </a>
         </div>
     </section>
 
-    <footer class="bg-black text-white text-center py-4">
+    <footer class="text-center py-4" style="border-top: 1px solid var(--glass-border); background: var(--bg-base); position: relative; z-index: 1;">
         <div class="container">
-            <small>&copy; 2026 Kauã da Silva. Todos os direitos reservados.</small>
+            <small class="text-muted">&copy; 2026 Kauã da Silva. Todos os direitos reservados.</small>
         </div>
     </footer>
 
@@ -626,7 +646,7 @@
         <i class="bi bi-whatsapp"></i>
     </a>
 
-    <button id="btnBackToTop" class="btn btn-primary" title="Voltar ao topo">
+    <button id="btnBackToTop" title="Voltar ao topo">
         <i class="bi bi-arrow-up"></i>
     </button>
 
@@ -638,9 +658,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center pt-0 pb-4 px-4">
-                    <h4 class="fw-bold text-primary mb-4">Java Completo Orientado a Objetos</h4>
-                    <img src="cert-java.jpg" alt="Certificado Java" class="img-fluid rounded shadow-sm border mb-4" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-java.jpg+na+pasta'">
-                    <a href="#" target="_blank" class="btn btn-primary px-4"><i class="bi bi-link-45deg me-1"></i> Verificar Autenticidade no Site</a>
+                    <h4 class="fw-bold mb-4" style="color: var(--primary-color);">Java Completo Orientado a Objetos</h4>
+                    <img src="cert-java.jpg" alt="Certificado Java" class="img-fluid rounded border mb-4" style="border-color: var(--glass-border) !important;" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-java.jpg+na+pasta'">
+                    <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4"><i class="bi bi-link-45deg me-1"></i> Autenticidade</a>
                 </div>
             </div>
         </div>
@@ -653,9 +673,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center pt-0 pb-4 px-4">
-                    <h4 class="fw-bold text-primary mb-4">Especialista Spring Boot & REST APIs</h4>
-                    <img src="spring-cert.jpg" alt="Certificado Spring" class="img-fluid rounded shadow-sm border mb-4" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-spring.jpg+na+pasta'">
-                    <a href="#" target="_blank" class="btn btn-primary px-4"><i class="bi bi-link-45deg me-1"></i> Verificar Autenticidade no Site</a>
+                    <h4 class="fw-bold mb-4" style="color: var(--primary-color);">Especialista Spring Boot & REST APIs</h4>
+                    <img src="spring-cert.jpg" alt="Certificado Spring" class="img-fluid rounded border mb-4" style="border-color: var(--glass-border) !important;" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+spring-cert.jpg+na+pasta'">
+                    <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4"><i class="bi bi-link-45deg me-1"></i> Autenticidade</a>
                 </div>
             </div>
         </div>
@@ -668,9 +688,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center pt-0 pb-4 px-4">
-                    <h4 class="fw-bold text-primary mb-4">DESENVOLVIMENTO DE APLICATIVOS MÓVEIS COM REACT NATIVE: DA INTERFACE AO CONSUMO DE APIS</h4>
-                    <img src="cert-react.jpg" alt="Certificado React" class="img-fluid rounded shadow-sm border mb-4" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-sql.jpg+na+pasta'">
-                    <a href="#" target="_blank" class="btn btn-primary px-4"><i class="bi bi-link-45deg me-1"></i> Verificar Autenticidade no Site</a>
+                    <h4 class="fw-bold mb-4" style="color: var(--primary-color);">Desenvolvimento Mobile React Native</h4>
+                    <img src="cert-react.jpg" alt="Certificado React" class="img-fluid rounded border mb-4" style="border-color: var(--glass-border) !important;" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-react.jpg+na+pasta'">
+                    <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4"><i class="bi bi-link-45deg me-1"></i> Autenticidade</a>
                 </div>
             </div>
         </div>
@@ -694,10 +714,8 @@
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
-                navbar.classList.remove('bg-dark'); 
             } else {
                 navbar.classList.remove('scrolled');
-                navbar.classList.add('bg-dark');
             }
             
             if (window.scrollY > 300) {
@@ -727,12 +745,10 @@
         window.addEventListener("scroll", reveal);
         reveal(); 
 
-        // Efeito Typing (Máquina de escrever)
+        // Efeito Typing
         const typingText = document.getElementById('typing-text');
-        const phrases = ["Especialista em Java.", "Focado em Spring Boot.", "Criador de Soluções Escaláveis.", "Apaixonado por Clean Code."];
-        let phraseIndex = 0;
-        let letterIndex = 0;
-        let isDeleting = false;
+        const phrases = ["Especialista em Java.", "Focado em Spring Boot.", "DevOps e Nuvem.", "Criador de Soluções."];
+        let phraseIndex = 0; let letterIndex = 0; let isDeleting = false;
 
         function type() {
             const currentPhrase = phrases[phraseIndex];
@@ -745,15 +761,12 @@
                 letterIndex++;
             }
 
-            let typeSpeed = isDeleting ? 50 : 100;
+            let typeSpeed = isDeleting ? 40 : 80;
 
             if (!isDeleting && letterIndex === currentPhrase.length) {
-                typeSpeed = 2000; 
-                isDeleting = true;
+                typeSpeed = 2000; isDeleting = true;
             } else if (isDeleting && letterIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                typeSpeed = 500; 
+                isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typeSpeed = 500; 
             }
             setTimeout(type, typeSpeed);
         }
