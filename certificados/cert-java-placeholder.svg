@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#0f172a"/>
+  <rect x="48" y="48" width="1104" height="704" rx="24" fill="#111827" stroke="#22d3ee" stroke-width="4"/>
+  <text x="600" y="330" text-anchor="middle" fill="#67e8f9" font-size="42" font-family="Arial, sans-serif">Certificado de Java Completo</text>
+  <text x="600" y="390" text-anchor="middle" fill="#e2e8f0" font-size="28" font-family="Arial, sans-serif">Substitua este arquivo pelo PDF/PNG oficial</text>
+  <rect x="360" y="470" width="480" height="70" rx="35" fill="#0ea5e9"/>
+  <text x="600" y="516" text-anchor="middle" fill="#ffffff" font-size="28" font-family="Arial, sans-serif">Autenticidade</text>
+</svg>

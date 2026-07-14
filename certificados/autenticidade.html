@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autenticidade do Certificado</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0a0c;
+      --card: rgba(255,255,255,0.05);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #00f2fe;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .card {
+      width: min(760px, 100%);
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+    h1 { margin-top: 0; color: var(--accent); }
+    p { color: var(--muted); line-height: 1.6; }
+    img {
+      width: 100%;
+      max-width: 720px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.16);
+      margin: 16px 0;
+      display: none;
+    }
+    .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+    a {
+      display: inline-block;
+      text-decoration: none;
+      color: #051019;
+      background: linear-gradient(90deg, #4facfe, #00f2fe);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .note {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1 id="title">Autenticidade do certificado</h1>
+    <p id="description">Este link foi configurado para abrir o certificado em uma nova aba.</p>
+    <img id="certificateImage" alt="Certificado" />
+    <div class="actions">
+      <a id="openFileLink" href="#" target="_blank" rel="noopener">Abrir arquivo</a>
+      <a href="../index.html#certificados">Voltar ao portfólio</a>
+    </div>
+    <p class="note">Substitua o arquivo de exemplo pelo certificado oficial real para que a autenticação fique completa.</p>
+  </main>
+
+  <script>
+    const certs = {
+      java: {
+        title: 'Autenticidade do certificado Java',
+        description: 'Este é o caminho configurado para o certificado de Java Completo.',
+        image: './cert-java-placeholder.svg',
+        fileLabel: 'Arquivo do certificado Java'
+      },
+      spring: {
+        title: 'Autenticidade do certificado Spring Boot',
+        description: 'Este é o caminho configurado para o certificado de Spring Boot e APIs REST.',
+        image: '../spring-cert.jpg',
+        fileLabel: 'Arquivo do certificado Spring'
+      },
+      react: {
+        title: 'Autenticidade do certificado React Native',
+        description: 'Este é o caminho configurado para o certificado de React Native.',
+        image: '../cert-react.jpg',
+        fileLabel: 'Arquivo do certificado React Native'
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get('cert') || 'java';
+    const cert = certs[key] || certs.java;
+
+    document.getElementById('title').textContent = cert.title;
+    document.getElementById('description').textContent = cert.description;
+    const img = document.getElementById('certificateImage');
+    const link = document.getElementById('openFileLink');
+    img.src = cert.image;
+    img.alt = cert.fileLabel;
+    img.style.display = 'block';
+    link.href = cert.image;
+    link.textContent = 'Abrir arquivo';
+  </script>
+</body>
+</html>

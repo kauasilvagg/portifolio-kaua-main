@@ -53,6 +53,11 @@
             position: relative;
         }
 
+        /* AJUSTE ESTRUTURAL: Impede que a navbar cubra os títulos ao clicar no menu */
+        section {
+            scroll-margin-top: 90px;
+        }
+
         body::before {
             content: '';
             position: fixed;
@@ -359,10 +364,11 @@
         .skill-flip-card-back h6 { color: var(--primary-color); }
         .skill-flip-card-back p { font-size: 0.85rem; line-height: 1.5; color: var(--text-muted); }
 
-        /* --- CARDS DE PROJETOS --- */
+        /* --- CARDS DE PROJETOS COM EFEITO TILT --- */
         .project-card {
             position: relative; height: 380px; border-radius: 20px; overflow: hidden;
             border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            /* O tilt cuidará da animação base, mas mantemos o estilo original */
         }
         .project-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease, opacity 0.4s ease; opacity: 0.6; }
         .project-card:hover .project-card-img { transform: scale(1.05); opacity: 0.3; }
@@ -385,9 +391,9 @@
         
         .badge { background: rgba(255,255,255,0.05) !important; border: 1px solid var(--glass-border) !important; color: var(--primary-color) !important; font-weight: 500; padding: 6px 12px; }
 
-        /* --- CERTIFICADOS --- */
+        /* --- CERTIFICADOS COM EFEITO TILT --- */
         .cert-card { transition: all 0.4s ease; position: relative; overflow: hidden; z-index: 1; }
-        .cert-card:hover { transform: translateY(-8px); border-color: rgba(0, 242, 254, 0.3); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.1); }
+        .cert-card:hover { border-color: rgba(0, 242, 254, 0.3); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.1); }
         .cert-card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
             background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); transform: scaleX(0); transition: transform 0.5s ease;
@@ -397,7 +403,7 @@
 
         /* --- TEXTOS E UTILITÁRIOS --- */
         .text-muted { color: var(--text-muted) !important; }
-        .text-dark { color: var(--text-main) !important; } /* Sobrescrevendo bootstrap */
+        .text-dark { color: var(--text-main) !important; }
 
         /* --- MODAIS --- */
         .modal-content { background-color: var(--bg-base); border: 1px solid var(--glass-border); border-radius: 20px; }
@@ -694,7 +700,7 @@
             <div class="row g-4">
                 
                 <div class="col-md-4 reveal" style="transition-delay: 0.1s;">
-                    <div class="project-card">
+                    <div class="project-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                         <img src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="ExtremeTours" class="project-card-img" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-title">
@@ -716,7 +722,7 @@
                 </div>
 
                 <div class="col-md-4 reveal" style="transition-delay: 0.2s;">
-                    <div class="project-card">
+                    <div class="project-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                         <img src="https://i.pinimg.com/736x/98/ee/d8/98eed85badc68b2acbaab99b53d0a63a--faust-santa-cruz.jpg" alt="Site da Igreja" class="project-card-img" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-title">
@@ -738,14 +744,14 @@
                 </div>
 
                 <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
-                    <div class="project-card">
+                    <div class="project-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
                         <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sistema de Gestão de Contratos" class="project-card-img" loading="lazy">
                         <div class="project-overlay">
                             <div class="project-title">
-                                <i class="bi bi-building"></i> Sistema de Gestão de Contratos
+                                <i class="bi bi-building"></i> Sistema de Contratos
                             </div>
                             <div class="project-details">
-                                <p class="project-desc-text">Sistema de gestão de contratos para uma empresa de seguros veicular.</p>
+                                <p class="project-desc-text">Sistema de gestão de contratos para uma empresa de seguros veicular. Otimiza consultas e centraliza dados.</p>
                                 <div class="mb-4">
                                     <span class="badge">PHP</span>
                                     <span class="badge">Hack</span>
@@ -773,7 +779,7 @@
             <div class="row justify-content-center g-4">
                 
                 <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.1s;">
-                    <div class="cert-card p-4 glass-card text-center h-100 d-flex flex-column">
+                    <div class="cert-card p-4 glass-card text-center h-100 d-flex flex-column" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.1">
                         <div class="mb-3"><i class="bi bi-award-fill fs-1" style="color: var(--primary-color);"></i></div>
                         <h5 class="fw-bold mb-2 text-white">Java Completo (OO)</h5>
                         <p class="text-muted small mb-4 flex-grow-1">Instituição: Udemy / Prof. Nélio Alves<br>Carga Horária: 50h</p>
@@ -784,7 +790,7 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.2s;">
-                    <div class="cert-card p-4 glass-card text-center h-100 d-flex flex-column">
+                    <div class="cert-card p-4 glass-card text-center h-100 d-flex flex-column" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.1">
                         <div class="mb-3"><i class="bi bi-patch-check-fill fs-1" style="color: var(--primary-color);"></i></div>
                         <h5 class="fw-bold mb-2 text-white">Spring Boot & REST APIs</h5>
                         <p class="text-muted small mb-4 flex-grow-1">Instituição: Universidade Ceuma<br>Carga Horária: 60h</p>
@@ -795,7 +801,7 @@
                 </div>
 
                 <div class="col-md-6 col-lg-4 reveal" style="transition-delay: 0.3s;">
-                    <div class="cert-card p-4 glass-card text-center h-100 d-flex flex-column">
+                    <div class="cert-card p-4 glass-card text-center h-100 d-flex flex-column" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.1">
                         <div class="mb-3"><i class="bi bi-shield-check fs-1" style="color: var(--primary-color);"></i></div>
                         <h5 class="fw-bold mb-2 text-white">React Native: Mobile</h5>
                         <p class="text-muted small mb-4 flex-grow-1">Instituição: Universidade Ceuma<br>Carga Horária: 60h</p>
@@ -830,11 +836,11 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/5598985122030?text=Olá,%20Kauã!%20Vi%20o%20seu%20portfólio%20e%20gostaria%20de%20falar%20com%20você." class="whatsapp-float" target="_blank" title="Fale comigo no WhatsApp">
+    <a href="https://wa.me/5598985122030?text=Olá,%20Kauã!%20Vi%20o%20seu%20portfólio%20e%20gostaria%20de%20falar%20com%20você." class="whatsapp-float" target="_blank" title="Fale comigo no WhatsApp" aria-label="Falar no WhatsApp">
         <i class="bi bi-whatsapp"></i>
     </a>
 
-    <button id="btnBackToTop" title="Voltar ao topo">
+    <button id="btnBackToTop" title="Voltar ao topo" aria-label="Voltar ao topo">
         <i class="bi bi-arrow-up"></i>
     </button>
 
@@ -884,6 +890,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     
     <script>
         // Navbar Mobile Collapse
