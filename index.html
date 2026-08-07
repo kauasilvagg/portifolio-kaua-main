@@ -16,7 +16,7 @@
     <meta property="og:title" content="Portfólio | Kauã da Silva - Desenvolvedor Backend">
     <meta property="og:description" content="Engenheiro de Computação, especialista em Java, Spring Boot e PHP. Veja meus projetos focados em Clean Code e arquitetura escalável.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80">
-    <meta property="og:url" content="https://seusite.vercel.app">
+    <meta property="og:url" content="https://portifolio-kaua-main.vercel.app/">
     <meta property="og:type" content="website">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
@@ -482,7 +482,7 @@
                     <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap mt-4">
                         <a href="#projetos" class="btn btn-primary rounded-pill px-5 py-3">Ver Portfólio</a>
                         <a href="https://github.com/kauasilvagg" target="_blank" class="btn btn-outline-light rounded-pill px-4 py-3"><i class="bi bi-github"></i> GitHub</a>
-                        <a href="Meu Contato.pdf" download="Curriculo_Kaua_Silva.pdf" class="btn btn-outline-light rounded-pill px-4 py-3"><i class="bi bi-file-earmark-pdf-fill me-1"></i> CV</a>
+                        <a id="downloadCurriculo" href="MeuCurriculo/Meu%20Contato.png" class="btn btn-outline-light rounded-pill px-4 py-3" aria-label="Baixar currículo em PDF"><i class="bi bi-download me-1"></i> Baixar currículo</a>
                     </div>
 
                     <div class="hero-highlights">
@@ -852,8 +852,8 @@
                 </div>
                 <div class="modal-body text-center pt-0 pb-4 px-4">
                     <h4 class="fw-bold mb-4" style="color: var(--primary-color);">Java Completo Orientado a Objetos</h4>
-                    <img src="cert-java.jpg" alt="Certificado Java" class="img-fluid rounded border mb-4" style="border-color: var(--glass-border) !important;" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-java.jpg+na+pasta'">
-                    <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4"><i class="bi bi-link-45deg me-1"></i> Autenticidade</a>
+                    <img src="cert-java.svg" alt="Certificado Java" class="img-fluid rounded border mb-4" style="border-color: var(--glass-border) !important;" loading="lazy">
+                    <a href="certificados/autenticidade.html?cert=java" target="_blank" rel="noopener" class="btn btn-primary rounded-pill px-4"><i class="bi bi-link-45deg me-1"></i> Autenticidade</a>
                 </div>
             </div>
         </div>
@@ -867,8 +867,8 @@
                 </div>
                 <div class="modal-body text-center pt-0 pb-4 px-4">
                     <h4 class="fw-bold mb-4" style="color: var(--primary-color);">Especialista Spring Boot & REST APIs</h4>
-                    <img src="spring-cert.jpg" alt="Certificado Spring" class="img-fluid rounded border mb-4" style="border-color: var(--glass-border) !important;" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+spring-cert.jpg+na+pasta'">
-                    <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4"><i class="bi bi-link-45deg me-1"></i> Autenticidade</a>
+                    <img src="spring-cert.svg" alt="Certificado Spring" class="img-fluid rounded border mb-4" style="border-color: var(--glass-border) !important;" loading="lazy">
+                    <a href="certificados/autenticidade.html?cert=spring" target="_blank" rel="noopener" class="btn btn-primary rounded-pill px-4"><i class="bi bi-link-45deg me-1"></i> Autenticidade</a>
                 </div>
             </div>
         </div>
@@ -882,18 +882,48 @@
                 </div>
                 <div class="modal-body text-center pt-0 pb-4 px-4">
                     <h4 class="fw-bold mb-4" style="color: var(--primary-color);">Desenvolvimento Mobile React Native</h4>
-                    <img src="cert-react.jpg" alt="Certificado React" class="img-fluid rounded border mb-4" style="border-color: var(--glass-border) !important;" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600.png?text=Coloque+a+foto+cert-react.jpg+na+pasta'">
-                    <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4"><i class="bi bi-link-45deg me-1"></i> Autenticidade</a>
+                    <img src="cert-react.svg" alt="Certificado React" class="img-fluid rounded border mb-4" style="border-color: var(--glass-border) !important;" loading="lazy">
+                    <a href="certificados/autenticidade.html?cert=react" target="_blank" rel="noopener" class="btn btn-primary rounded-pill px-4"><i class="bi bi-link-45deg me-1"></i> Autenticidade</a>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     
     <script>
+        // Converte a imagem do currículo em PDF antes de iniciar o download.
+        document.getElementById('downloadCurriculo').addEventListener('click', async (event) => {
+            event.preventDefault();
+            const button = event.currentTarget;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="bi bi-hourglass-split me-1"></i> Gerando PDF...';
+            button.setAttribute('aria-busy', 'true');
+
+            try {
+                const image = new Image();
+                image.src = button.href;
+                await new Promise((resolve, reject) => {
+                    image.onload = resolve;
+                    image.onerror = reject;
+                });
+
+                const { jsPDF } = window.jspdf;
+                const orientation = image.width > image.height ? 'landscape' : 'portrait';
+                const pdf = new jsPDF({ orientation, unit: 'px', format: [image.width, image.height] });
+                pdf.addImage(image, 'PNG', 0, 0, image.width, image.height);
+                pdf.save('Curriculo_Kaua_Silva.pdf');
+            } catch (error) {
+                window.open(button.href, '_blank', 'noopener');
+            } finally {
+                button.innerHTML = originalText;
+                button.removeAttribute('aria-busy');
+            }
+        });
+
         // Navbar Mobile Collapse
         const navLinks = document.querySelectorAll('.nav-link');
         const menuToggle = document.getElementById('navbarNav');
